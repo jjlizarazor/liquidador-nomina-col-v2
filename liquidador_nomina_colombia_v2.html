@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liquidador de Nómina Colombia 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#f0f2f5; --card:#ffffff; --text:#0f1923; --muted:#6b7a8d; --line:#dde2ea;
+      --brand:#1a56db; --brand-dark:#1040b0; --teal:#0f766e; --warn:#b45309; --bad:#b91c1c; --good:#047857;
+      --soft:#eef3ff; --shadow:0 2px 12px rgba(15,25,35,.07);
+      --font-body:'IBM Plex Sans',sans-serif; --font-mono:'IBM Plex Mono',monospace;
+      --radius:14px; --radius-sm:8px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+
+    /* HEADER */
+    header{background:var(--text);color:#fff;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+    header h1 span{color:#60a5fa}
+    .header-tags{display:flex;gap:8px;flex-wrap:wrap}
+    .htag{font-size:11px;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:var(--font-mono)}
+
+    /* LAYOUT */
+    main{max-width:1380px;margin:0 auto;padding:20px}
+    .layout{display:grid;grid-template-columns:400px 1fr;gap:18px;align-items:start}
+
+    /* CARDS */
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .card-header{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+    .card-header h2{font-size:15px;font-weight:700;flex:1}
+    .card-body{padding:18px}
+    .card-body + .card-body{border-top:1px solid var(--line)}
+
+    /* MODULE BADGE */
+    .mod-badge{font-size:10px;font-family:var(--font-mono);font-weight:600;padding:2px 8px;border-radius:4px;text-transform:uppercase}
+    .mod-0{background:#e0e7ff;color:#3730a3}
+    .mod-1{background:#d1fae5;color:#065f46}
+    .mod-2{background:#fee2e2;color:#991b1b}
+
+    /* SECTION LABELS */
+    .section-title{font-size:11px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+    .section-title:first-child{margin-top:0}
+
+    /* FORM */
+    label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.04em}
+    input,select,textarea{width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);padding:9px 12px;background:#fff;color:var(--text);font:inherit;font-size:13px;transition:border .15s}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand)}
+    textarea{min-height:160px;font-family:var(--font-mono);font-size:12px;resize:vertical}
+    input[type="checkbox"]{width:auto;margin-right:6px;accent-color:var(--brand)}
+    .check-label{display:flex;align-items:center;font-size:13px;font-weight:400;color:var(--text);margin:8px 0;text-transform:none;letter-spacing:0;cursor:pointer}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    .hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:5px}
+    .file-area{border:1px dashed var(--line);padding:12px;border-radius:var(--radius-sm);background:#fafbfc}
+
+    /* BUTTONS */
+    .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    button{border:0;border-radius:var(--radius-sm);padding:9px 16px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s,background .15s}
+    .btn-primary{background:var(--brand);color:white}
+    .btn-primary:hover{background:var(--brand-dark)}
+    .btn-secondary{background:#e8edf7;color:var(--text)}
+    .btn-secondary:hover{background:#d5ddf0}
+    .btn-ghost{background:#fff;border:1px solid var(--line);color:var(--text)}
+    .btn-ghost:hover{background:#f5f7fa}
+    .btn-teal{background:var(--teal);color:white}
+
+    /* METRICS */
+    .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+    .metric{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px}
+    .metric .k{font-size:11px;font-family:var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+    .metric .v{font-size:22px;font-weight:700;margin-top:4px;font-family:var(--font-mono)}
+    .metric .s{font-size:11px;color:var(--muted);margin-top:2px}
+    .metric.highlight{background:var(--text);border-color:var(--text)}
+    .metric.highlight .k{color:rgba(255,255,255,.6)}
+    .metric.highlight .v{color:#fff}
+    .metric.highlight .s{color:rgba(255,255,255,.5)}
+    .metric.good-bg{background:#f0fdf4;border-color:#bbf7d0}
+    .metric.good-bg .v{color:var(--good)}
+    .metric.bad-bg{background:#fff1f2;border-color:#fecdd3}
+    .metric.bad-bg .v{color:var(--bad)}
+
+    /* LIQUIDACION BLOCKS */
+    .liq-section{background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--line);margin-bottom:12px;overflow:hidden}
+    .liq-section-header{padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+    .liq-section-header span{font-size:12px;font-weight:700;flex:1}
+    .liq-section-body{padding:0}
+    .liq-row{display:grid;grid-template-columns:1fr auto;padding:8px 14px;border-bottom:1px solid var(--line);font-size:13px}
+    .liq-row:last-child{border-bottom:0}
+    .liq-row .concept{color:var(--text)}
+    .liq-row .amount{font-family:var(--font-mono);font-weight:600;text-align:right}
+    .liq-row.sub .concept{color:var(--muted);font-size:12px;padding-left:12px}
+    .liq-row.sub .amount{color:var(--muted);font-size:12px}
+    .liq-row.total-row{background:var(--text);padding:10px 14px}
+    .liq-row.total-row .concept{color:#fff;font-weight:700}
+    .liq-row.total-row .amount{color:#60a5fa;font-family:var(--font-mono);font-weight:700;font-size:16px}
+    .liq-row.neto{background:var(--good);padding:12px 14px}
+    .liq-row.neto .concept{color:#fff;font-weight:700;font-size:15px}
+    .liq-row.neto .amount{color:#fff;font-family:var(--font-mono);font-weight:700;font-size:18px}
+    .liq-row.deduccion .amount{color:var(--bad)}
+
+    /* TABS */
+    .tabs{display:flex;gap:6px;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:0}
+    .tab{padding:8px 14px;border-radius:var(--radius-sm) var(--radius-sm) 0 0;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);background:none;border:1px solid transparent;border-bottom:none;position:relative;bottom:-1px}
+    .tab.active{background:#fff;border-color:var(--line);color:var(--brand)}
+    .hidden{display:none}
+
+    /* PILLS */
+    .pill{display:inline-flex;align-items:center;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;font-family:var(--font-mono)}
+    .pill.warn{background:#fff7ed;color:var(--warn)}
+    .pill.bad{background:#fee2e2;color:var(--bad)}
+    .pill.good{background:#dcfce7;color:var(--good)}
+    .pill.info{background:#dbeafe;color:#1d4ed8}
+
+    /* TABLES */
+    table{width:100%;border-collapse:collapse;font-size:12px}
+    th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{background:#f8f9fb;color:var(--muted);font-size:11px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+    tr:last-child td{border-bottom:0}
+    td.num{text-align:right;font-family:var(--font-mono)}
+
+    /* DIVIDER */
+    .divider{height:1px;background:var(--line);margin:16px 0}
+
+    /* NOTAS */
+    .notes{font-size:13px;color:#334155;line-height:1.6}
+    .notes ul{padding-left:18px;margin-top:8px}
+    .notes li{margin-bottom:6px}
+
+    /* COLILLA IMPRIMIBLE */
+    @media print {
+      body{background:#fff;font-size:12px}
+      header,.no-print{display:none!important}
+      main{padding:0;max-width:none}
+      .layout{display:block}
+      .card{box-shadow:none;border:1px solid #ccc;margin-bottom:16px}
+      .input-card{display:none!important}
+      table{page-break-inside:auto}
+      tr{page-break-inside:avoid}
+    }
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.metrics-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Liquidador de <span>Nómina</span> Colombia</h1>
+    <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px">Horas · Devengado · Deducciones · Neto a pagar</div>
+  </div>
+  <div class="header-tags">
+    <span class="htag">Ley 2101/2021</span>
+    <span class="htag">Ley 2466/2025</span>
+    <span class="htag">CST Art. 158–179</span>
+    <span class="htag">Solo navegador · sin internet</span>
+  </div>
+</header>
+
+<main>
+<div class="layout">
+
+  <!-- ========== PANEL IZQUIERDO ========== -->
+  <div class="input-card no-print">
+
+    <!-- MÓDULO 0: HORARIO Y HORAS -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-header">
+        <span class="mod-badge mod-0">Módulo 0</span>
+        <h2>Horario y periodo</h2>
+      </div>
+      <div class="card-body">
+        <label>Nombre del trabajador</label>
+        <input id="employeeName" value="Trabajador 1">
+
+        <div class="row2" style="margin-top:10px">
+          <div>
+            <label>Periodo</label>
+            <select id="periodType">
+              <option value="mensual" selected>Mensualidad</option>
+              <option value="quincena1">Primera quincena</option>
+              <option value="quincena2">Segunda quincena</option>
+              <option value="custom">Personalizado</option>
+            </select>
+          </div>
+          <div>
+            <label>Mes base</label>
+            <input id="monthBase" type="month" value="2026-05">
+          </div>
+        </div>
+        <div class="row2" style="margin-top:10px">
+          <div><label>Fecha inicio</label><input id="startDate" type="date" value="2026-05-01"></div>
+          <div><label>Fecha fin</label><input id="endDate" type="date" value="2026-05-31"></div>
+        </div>
+        <div class="row2" style="margin-top:10px">
+          <div>
+            <label>Año calendario</label>
+            <input id="calendarYear" type="number" min="2020" max="2035" value="2026">
+          </div>
+          <div>
+            <label>Modo semana</label>
+            <select id="weekMode">
+              <option value="calendar" selected>Calendario regular</option>
+              <option value="relative">Relativo desde lunes</option>
+            </select>
+          </div>
+        </div>
+        <div id="relativeWeekBlock" class="hidden" style="margin-top:10px">
+          <label>Lunes de la Semana 1</label>
+          <input id="week1Monday" type="date" value="2026-01-05">
+        </div>
+
+        <div class="section-title">Jornada</div>
+        <div class="row2">
+          <div>
+            <label>Límite diario (h)</label>
+            <input id="dailyLimit" type="number" min="1" step="0.25" value="8">
+          </div>
+          <div>
+            <label>Jornada semanal</label>
+            <select id="weeklyMode">
+              <option value="auto">Auto Ley 2101</option>
+              <option value="44">Forzar 44 h</option>
+              <option value="42">Forzar 42 h</option>
+            </select>
+          </div>
+        </div>
+        <label class="check-label"><input id="includeHolidays" type="checkbox" checked>Aplicar festivos Colombia 2026</label>
+        <label class="check-label"><input id="useSundayAsRest" type="checkbox" checked>Domingos como descanso obligatorio</label>
+
+        <div class="section-title">Horario CSV</div>
+        <div class="file-area">
+          <label>Importar archivo CSV</label>
+          <input id="fileInput" type="file" accept=".csv,text/csv">
+          <div class="hint">Columnas: Semana;Lunes;Martes;Miercoles;Jueves;Viernes;Sabado;Domingo;HrsSemanales</div>
+        </div>
+        <label style="margin-top:12px">Pegar / editar CSV</label>
+        <textarea id="csvInput">Semana;Lunes;Martes;Miercoles;Jueves;Viernes;Sabado;Domingo;HrsSemanales
+Semana18;10:00-17:00;10:00-17:00;10:00-17:00;17:00-00:00;Díadelafamilia;Descanso;06:00-13:00;35
+Semana19;06:00-13:00;06:00-13:00;06:00-13:00;06:00-13:00;06:00-15:00;Descanso;06:00-13:00;44
+Semana20;06:00-13:00;06:00-13:00;06:00-13:00;06:00-13:00;06:00-15:00;06:00-13:00;Descanso;44
+Semana21;17:00-00:00;10:00-17:00;17:00-00:00;17:00-00:00;Descanso;17:00-00:00;17:00-00:00;42
+Semana22;17:00-00:00;10:00-17:00;17:00-00:00;15:00-00:00;Descanso;17:00-00:00;17:00-00:00;44</textarea>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1: DEVENGADO ADICIONAL -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-header">
+        <span class="mod-badge mod-1">Módulo 1</span>
+        <h2>Devengado adicional</h2>
+      </div>
+      <div class="card-body">
+        <div class="section-title">Salario</div>
+        <label>Salario mensual base (COP)</label>
+        <input id="salary" type="number" min="0" step="1000" value="1423500">
+        <div class="hint">SMLMV 2026: $1.423.500 · Aux. transporte: $200.000 (si gana ≤ 2 SMLMV)</div>
+
+        <label class="check-label" style="margin-top:10px"><input id="includeTransporte" type="checkbox" checked>Incluir auxilio de transporte automático</label>
+        <label class="check-label"><input id="salarioIntegral" type="checkbox">Salario integral (≥ 13 SMLMV — sin aux. transporte)</label>
+
+        <div class="section-title">Provisiones mensuales</div>
+        <div class="hint" style="margin-bottom:10px">Estas provisiones muestran cuánto se "acumula" cada mes para el trabajador, aunque se paguen en otras fechas.</div>
+
+        <div class="row2">
+          <div>
+            <label>Días trabajados en el mes</label>
+            <input id="diasTrabajados" type="number" min="0" max="31" value="30">
+          </div>
+          <div>
+            <label>Días de vacaciones gozadas</label>
+            <input id="diasVacaciones" type="number" min="0" max="30" value="0">
+          </div>
+        </div>
+
+        <label class="check-label" style="margin-top:10px"><input id="inclVacaciones" type="checkbox" checked>Provisión vacaciones (4.17% mensual)</label>
+        <label class="check-label"><input id="inclPrima" type="checkbox" checked>Provisión prima de servicios (8.33% mensual)</label>
+        <label class="check-label"><input id="inclCesantias" type="checkbox" checked>Provisión cesantías (8.33% mensual)</label>
+        <label class="check-label"><input id="inclIntCesantias" type="checkbox" checked>Provisión intereses s/ cesantías (1% mensual)</label>
+
+        <div class="section-title">Otros ingresos</div>
+        <div class="row2">
+          <div>
+            <label>Comisiones (COP)</label>
+            <input id="comisiones" type="number" min="0" value="0">
+          </div>
+          <div>
+            <label>Bonificaciones (COP)</label>
+            <input id="bonificaciones" type="number" min="0" value="0">
+          </div>
+        </div>
+        <label>Otros ingresos / concepto libre (COP)</label>
+        <input id="otrosIngresos" type="number" min="0" value="0">
+      </div>
+    </div>
+
+    <!-- MÓDULO 2: DEDUCCIONES -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-header">
+        <span class="mod-badge mod-2">Módulo 2</span>
+        <h2>Deducciones del trabajador</h2>
+      </div>
+      <div class="card-body">
+        <div class="section-title">Seguridad social (sobre salario base)</div>
+        <div class="hint" style="margin-bottom:10px">Se aplican sobre el salario base + horas extras. Las provisiones no son base de SS.</div>
+        <label class="check-label"><input id="inclSalud" type="checkbox" checked>Salud — 4% a cargo del trabajador</label>
+        <label class="check-label"><input id="inclPension" type="checkbox" checked>Pensión — 4% a cargo del trabajador</label>
+        <label class="check-label"><input id="inclFondoSol" type="checkbox">Fondo solidaridad pensional (si gana &gt; 4 SMLMV)</label>
+
+        <div class="section-title">Otras deducciones</div>
+        <div class="row2">
+          <div>
+            <label>Libranza / crédito (COP)</label>
+            <input id="libranza" type="number" min="0" value="0">
+          </div>
+          <div>
+            <label>Embargo judicial (COP)</label>
+            <input id="embargo" type="number" min="0" value="0">
+          </div>
+        </div>
+        <div class="row2">
+          <div>
+            <label>Anticipo de nómina (COP)</label>
+            <input id="anticipo" type="number" min="0" value="0">
+          </div>
+          <div>
+            <label>Otras deducciones (COP)</label>
+            <input id="otrasDeduciones" type="number" min="0" value="0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btns" style="margin-bottom:20px">
+      <button class="btn-primary" onclick="calculate()">⟳ Calcular nómina</button>
+      <button class="btn-secondary" onclick="downloadCSV()">↓ Exportar CSV</button>
+      <button class="btn-ghost" onclick="window.print()">⎙ Imprimir colilla</button>
+    </div>
+    <div class="hint" style="margin-bottom:20px">Este formulario funciona localmente en el navegador. No envía datos a internet.</div>
+  </div>
+
+  <!-- ========== PANEL DERECHO ========== -->
+  <div>
+    <div class="card">
+      <div class="card-header">
+        <h2 id="resultTitle">Resultado de liquidación</h2>
+      </div>
+      <div class="card-body">
+        <div id="alerts"></div>
+        <div class="metrics-grid" id="summary"></div>
+      </div>
+
+      <!-- LIQUIDACIÓN DETALLADA -->
+      <div class="card-body">
+        <div class="section-title" style="margin-top:0">Colilla de pago</div>
+        <div id="colilla"></div>
+      </div>
+
+      <!-- TABS DETALLE TÉCNICO -->
+      <div class="card-body">
+        <div class="tabs no-print">
+          <span class="tab active" onclick="showTab('resumen')">Resumen horas</span>
+          <span class="tab" onclick="showTab('detalle')">Detalle día a día</span>
+          <span class="tab" onclick="showTab('normativa')">Normativa</span>
+        </div>
+
+        <div id="tab-resumen">
+          <table>
+            <thead><tr><th>Concepto horas</th><th class="num">Horas</th><th class="num">Recargo</th><th class="num">Valor adicional</th><th class="num">Valor total</th></tr></thead>
+            <tbody id="summaryRows"></tbody>
+          </table>
+        </div>
+
+        <div id="tab-detalle" class="hidden">
+          <table>
+            <thead><tr><th>Fecha</th><th>Día</th><th>Semana</th><th>Turno</th><th>Clasificación</th><th class="num">Horas</th><th class="num">Base/h</th><th class="num">Adicional</th><th>Alertas</th></tr></thead>
+            <tbody id="detailRows"></tbody>
+          </table>
+        </div>
+
+        <div id="tab-normativa" class="hidden notes">
+          <h3 style="margin-bottom:10px">Reglas y normativa aplicada</h3>
+          <ul>
+            <li><strong>Jornada semanal:</strong> 44h desde jul 15/2025 · 42h desde jul 15/2026 (Ley 2101/2021)</li>
+            <li><strong>Jornada nocturna:</strong> 7:00 p.m. a 6:00 a.m. (Ley 2466/2025, vigente dic 25/2025)</li>
+            <li><strong>Recargo nocturno ordinario:</strong> +35% (Art. 168 CST)</li>
+            <li><strong>Extra diurna:</strong> +25% · Extra nocturna: +75% (Art. 168 CST)</li>
+            <li><strong>Dominical/festivo ordinario:</strong> +80% (2026) → +90% (2027) → +100% (2028+) (Ley 2466/2025)</li>
+            <li><strong>Valor hora:</strong> salario ÷ 220h (antes jul 2026) · salario ÷ 210h (desde jul 2026)</li>
+            <li><strong>Auxilio de transporte:</strong> $200.000/mes si salario ≤ 2 SMLMV ($2.847.000). No es base de SS.</li>
+            <li><strong>Provisión vacaciones:</strong> salario × 4.17% (15 días hábiles/año → Art. 186 CST)</li>
+            <li><strong>Provisión prima:</strong> (salario + aux. transporte) × 8.33% (Art. 306 CST)</li>
+            <li><strong>Provisión cesantías:</strong> (salario + aux. transporte) × 8.33% (Art. 249 CST)</li>
+            <li><strong>Intereses cesantías:</strong> cesantías × 12% anual → 1% mensual (Ley 52/1975)</li>
+            <li><strong>Salud trabajador:</strong> 4% · Pensión trabajador: 4% (Ley 100/1993). Base = salario devengado (sin provisiones, sin aux. transporte).</li>
+            <li><strong>Fondo solidaridad:</strong> 1% adicional si devengado &gt; 4 SMLMV ($5.694.000)</li>
+            <li><strong>Límite extras:</strong> máx. 2h/día y 12h/semana (Art. 167 CST)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script>
+// ============================================================
+// CONSTANTES Y CONFIGURACIÓN
+// ============================================================
+const SMLMV_2026 = 1423500;
+const AUX_TRANSPORTE_2026 = 200000;
+
+const dayCols = [
+  ["Lunes",1],["Martes",2],["Miercoles",3],["Jueves",4],["Viernes",5],["Sabado",6],["Domingo",0]
+];
+
+const holidays2026 = new Map([
+  ["2026-01-01","Año Nuevo"],["2026-01-12","Reyes Magos"],["2026-03-23","San José"],
+  ["2026-04-02","Jueves Santo"],["2026-04-03","Viernes Santo"],["2026-05-01","Día del Trabajo"],
+  ["2026-05-18","Ascensión"],["2026-06-08","Corpus Christi"],["2026-06-15","Sagrado Corazón"],
+  ["2026-06-29","San Pedro y San Pablo"],["2026-07-20","Independencia"],["2026-08-07","Boyacá"],
+  ["2026-08-17","Asunción"],["2026-10-12","Diversidad Étnica"],["2026-11-02","Todos los Santos"],
+  ["2026-11-16","Independencia Cartagena"],["2026-12-08","Inmaculada"],["2026-12-25","Navidad"]
+]);
+
+let lastDetails = [], lastSummary = [];
+
+// ============================================================
+// UTILIDADES
+// ============================================================
+const pad = n => String(n).padStart(2,"0");
+const fmtDate = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parseDate = s => { const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d,0,0,0,0); };
+const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
+const diffHours = (a,b) => (b-a)/3600000;
+const money = n => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(Math.round(n||0));
+const pct = n => (n*100).toFixed(1)+"%";
+const num = n => new Intl.NumberFormat("es-CO",{maximumFractionDigits:2}).format(n||0);
+const dayName = d => ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"][d.getDay()];
+const v = id => document.getElementById(id);
+const chk = id => document.getElementById(id).checked;
+const val = id => parseFloat(document.getElementById(id).value)||0;
+
+// ============================================================
+// LÓGICA DE HORAS (módulo 0 — igual que antes)
+// ============================================================
+function weeklyLimitFor(date){
+  const m = v("weeklyMode").value;
+  if(m==="44") return 44; if(m==="42") return 42;
+  return date >= parseDate("2026-07-15") ? 42 : 44;
+}
+function monthlyDivisorFor(date){ return date >= parseDate("2026-07-15") ? 210 : 220; }
+function domRateFor(date){ const y=date.getFullYear(); if(y<=2025)return .80; if(y===2026)return .90; return 1.00; }
+function isHoliday(date){ return chk("includeHolidays") && holidays2026.has(fmtDate(date)); }
+function isSundayRest(date){ return chk("useSundayAsRest") && date.getDay()===0; }
+function conceptKey(extra,night,domFest){
+  if(extra&&domFest&&night) return "Extra nocturna dominical/festiva";
+  if(extra&&domFest&&!night) return "Extra diurna dominical/festiva";
+  if(extra&&night) return "Extra nocturna";
+  if(extra&&!night) return "Extra diurna";
+  if(!extra&&domFest&&night) return "Ordinaria nocturna dominical/festiva";
+  if(!extra&&domFest&&!night) return "Ordinaria diurna dominical/festiva";
+  if(!extra&&night) return "Recargo nocturno ordinario";
+  return "Ordinaria diurna";
+}
+function recargoPct(extra,night,domFest,date){
+  let p=0;
+  if(extra) p += night ? .75 : .25;
+  else if(night) p += .35;
+  if(domFest) p += domRateFor(date);
+  return p;
+}
+function additionalPay(hours,hourly,p,extra){ return hours*hourly*(extra?(1+p):p); }
+function getMondayOfISOWeek(year,week){
+  const jan4=new Date(year,0,4);
+  const jan4Day=(jan4.getDay()+6)%7;
+  const w1Mon=addDays(jan4,-jan4Day);
+  return addDays(w1Mon,(week-1)*7);
+}
+function weekStartForRow(row,index){
+  const weekNumber=Number((row.Semana||"").match(/\d+/)?.[0]||(index+1));
+  if(v("weekMode").value==="calendar"){
+    const year=Number(v("calendarYear").value||new Date().getFullYear());
+    return {weekNumber, weekStart:getMondayOfISOWeek(year,weekNumber)};
+  }
+  const w1Mon=parseDate(v("week1Monday").value);
+  return {weekNumber, weekStart:addDays(w1Mon,(weekNumber-1)*7)};
+}
+function parseCSV(text){
+  const lines=text.replace(/\r/g,"").split("\n").filter(l=>l.trim().length);
+  if(!lines.length) return [];
+  const headers=lines[0].split(";").map(h=>h.trim());
+  return lines.slice(1).map(line=>{ const cells=line.split(";"); const obj={}; headers.forEach((h,i)=>obj[h]=(cells[i]||"").trim()); return obj; });
+}
+function parseShift(value,date){
+  const vv=(value||"").trim();
+  if(!vv||/^(descanso|noaplica|n\/a|na|-|)$/i.test(vv)) return [];
+  const chunks=vv.split(/[,+]/).map(x=>x.trim()).filter(Boolean);
+  const intervals=[];
+  for(const c of chunks){
+    const m=c.match(/^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$/);
+    if(!m) continue;
+    const start=new Date(date); start.setHours(Number(m[1]),Number(m[2]),0,0);
+    const end=new Date(date); end.setHours(Number(m[3]),Number(m[4]),0,0);
+    if(end<=start) end.setDate(end.getDate()+1);
+    intervals.push({start,end,raw:c});
+  }
+  return intervals;
+}
+function splitInterval(interval){
+  const points=[interval.start.getTime(),interval.end.getTime()];
+  let cursor=new Date(interval.start); cursor.setHours(0,0,0,0);
+  for(let i=-1;i<=2;i++){
+    const d=addDays(cursor,i);
+    [[6,0],[19,0],[24,0],[0,0]].forEach(([h,mm])=>{
+      const p=new Date(d); p.setHours(h,mm,0,0);
+      if(p>interval.start&&p<interval.end) points.push(p.getTime());
+    });
+  }
+  points.sort((a,b)=>a-b);
+  const segs=[];
+  for(let i=0;i<points.length-1;i++){
+    const a=new Date(points[i]),b=new Date(points[i+1]);
+    const mid=new Date((a.getTime()+b.getTime())/2);
+    const hour=mid.getHours()+mid.getMinutes()/60;
+    const night=hour>=19||hour<6;
+    segs.push({start:a,end:b,hours:diffHours(a,b),night});
+  }
+  return segs;
+}
+function getWeekKey(date){
+  const d=new Date(date); d.setHours(0,0,0,0);
+  const monday=addDays(d,-((d.getDay()+6)%7));
+  return fmtDate(monday);
+}
+function groupBy(arr,fn){ const m=new Map(); arr.forEach(x=>{const k=fn(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x);}); return m; }
+
+// ============================================================
+// CÁLCULO PRINCIPAL
+// ============================================================
+function calculate(){
+  const salary = val("salary");
+  const startDate = parseDate(v("startDate").value);
+  const endDate = parseDate(v("endDate").value);
+  endDate.setHours(23,59,59,999);
+  const dailyLimit = val("dailyLimit") || 8;
+  const rows = parseCSV(v("csvInput").value);
+  const alerts = [];
+  let allSegments = [];
+
+  rows.forEach((row,wi)=>{
+    const {weekStart} = weekStartForRow(row,wi);
+    for(const [col] of dayCols){
+      const dayOffset = dayCols.find(x=>x[0]===col)[1]===0 ? 6 : dayCols.find(x=>x[0]===col)[1]-1;
+      const date = addDays(weekStart,dayOffset);
+      if(date<startDate||date>endDate) continue;
+      const intervals = parseShift(row[col],date);
+      const raw = row[col]||"";
+      intervals.forEach(interval=>{
+        splitInterval(interval).forEach(seg=>{
+          const segDate=new Date(seg.start);
+          const dateKey=fmtDate(date);
+          const holidayName=holidays2026.get(dateKey)||"";
+          const domFest=isSundayRest(date)||isHoliday(date);
+          const hourly=salary/monthlyDivisorFor(date);
+          allSegments.push({
+            date,dateKey,day:dayName(date),week:row.Semana||`Sem`,
+            raw,start:seg.start,end:seg.end,hours:seg.hours,night:seg.night,
+            domFest,holidayName,hourly,extra:false,extraReason:"",weekKey:getWeekKey(date)
+          });
+        });
+      });
+    }
+  });
+
+  allSegments.sort((a,b)=>a.start-b.start);
+  const dayGroups=groupBy(allSegments,s=>s.dateKey);
+  dayGroups.forEach((segments,dateKey)=>{
+    let acc=0; segments.sort((a,b)=>a.start-b.start);
+    for(const s of segments){
+      const before=acc; acc+=s.hours;
+      if(before>=dailyLimit){ s.extra=true; s.extraReason="Excede límite diario"; }
+      else if(acc>dailyLimit){
+        const extraPart=acc-dailyLimit, ordinaryPart=s.hours-extraPart;
+        if(ordinaryPart>0.0001){
+          s.hours=ordinaryPart;
+          const clone={...s,hours:extraPart,extra:true,extraReason:"Excede límite diario",start:new Date(s.end.getTime()-extraPart*3600000)};
+          allSegments.push(clone);
+        } else { s.extra=true; s.extraReason="Excede límite diario"; }
+      }
+    }
+    if(acc>dailyLimit+2) alerts.push({type:"bad",msg:`${dateKey}: extras diarias > 2h. Total: ${num(acc)}h`});
+  });
+
+  allSegments.sort((a,b)=>a.start-b.start);
+  const weekGroups=groupBy(allSegments,s=>s.weekKey);
+  weekGroups.forEach((segments,weekKey)=>{
+    const limit=Math.min(...segments.map(s=>weeklyLimitFor(s.date)));
+    let ordinary=segments.filter(s=>!s.extra).reduce((a,s)=>a+s.hours,0);
+    if(ordinary>limit){
+      let excess=ordinary-limit;
+      const candidates=segments.filter(s=>!s.extra).sort((a,b)=>b.start-a.start);
+      for(const s of candidates){
+        if(excess<=0) break;
+        if(s.hours<=excess+0.0001){ s.extra=true; s.extraReason="Excede límite semanal"; excess-=s.hours; }
+        else {
+          const extraPart=excess, ordinaryPart=s.hours-extraPart;
+          s.hours=ordinaryPart;
+          const clone={...s,hours:extraPart,extra:true,extraReason:"Excede límite semanal",start:new Date(s.end.getTime()-extraPart*3600000)};
+          allSegments.push(clone); excess=0;
+        }
+      }
+    }
+    const finalExtra=allSegments.filter(s=>s.weekKey===weekKey&&s.extra).reduce((a,s)=>a+s.hours,0);
+    if(finalExtra>12) alerts.push({type:"bad",msg:`Semana ${weekKey}: extras > 12h. Calculadas: ${num(finalExtra)}h`});
+  });
+
+  allSegments=allSegments.filter(s=>s.hours>0.0001).sort((a,b)=>a.start-b.start);
+
+  const summary=new Map(); const details=[];
+  allSegments.forEach(s=>{
+    const p=recargoPct(s.extra,s.night,s.domFest,s.date);
+    const key=conceptKey(s.extra,s.night,s.domFest);
+    const add=additionalPay(s.hours,s.hourly,p,s.extra);
+    const total=s.hours*s.hourly*(1+p);
+    if(!summary.has(key)) summary.set(key,{concept:key,hours:0,pct:p,additional:0,total:0});
+    const item=summary.get(key);
+    item.hours+=s.hours; item.additional+=add; item.total+=total; item.pct=Math.max(item.pct,p);
+    details.push({fecha:s.dateKey,dia:s.day,semana:s.week,turno:s.raw,clasificacion:key,horas:s.hours,baseHora:s.hourly,adicional:add,pct:p,alerta:s.extraReason||(s.holidayName||"")});
+  });
+
+  lastDetails=details;
+  lastSummary=[...summary.values()].sort((a,b)=>a.concept.localeCompare(b.concept));
+
+  // ============================================================
+  // MÓDULO 1 — DEVENGADO
+  // ============================================================
+  const totalHorasValor = lastSummary.reduce((a,x)=>a+x.total,0);
+  const extraHorasValor = lastSummary.filter(x=>x.concept.startsWith("Extra")||x.concept.includes("nocturno")||x.concept.includes("nocturna")||x.concept.includes("dominical")||x.concept.includes("festiva")).reduce((a,x)=>a+x.additional,0);
+
+  // Salario base proporcional si no trabajó mes completo
+  const diasMes = 30;
+  const diasTrab = Math.min(val("diasTrabajados"), diasMes);
+  const salarioProporcional = salary * (diasTrab / diasMes);
+
+  // Auxilio de transporte
+  const esIntegral = chk("salarioIntegral");
+  const tieneAuxTransporte = chk("includeTransporte") && !esIntegral && salary <= SMLMV_2026 * 2;
+  const auxTransporte = tieneAuxTransporte ? AUX_TRANSPORTE_2026 * (diasTrab / diasMes) : 0;
+
+  // Otros ingresos
+  const comisiones = val("comisiones");
+  const bonificaciones = val("bonificaciones");
+  const otrosIngresos = val("otrosIngresos");
+
+  // Total devengado (base para SS = salario + extras, sin aux transporte ni provisiones)
+  const devengadoBaseSS = salarioProporcional + extraHorasValor + comisiones + bonificaciones + otrosIngresos;
+  const totalDevengado = devengadoBaseSS + auxTransporte;
+
+  // Provisiones (informativas — costo empresa)
+  const baseProvision = salarioProporcional + auxTransporte; // prima y cesantías incluyen aux transporte
+  const provVacaciones = chk("inclVacaciones") ? salarioProporcional * 0.0417 : 0;
+  const provPrima = chk("inclPrima") ? baseProvision * 0.0833 : 0;
+  const provCesantias = chk("inclCesantias") ? baseProvision * 0.0833 : 0;
+  const provIntCesantias = chk("inclIntCesantias") ? provCesantias * 0.01 * 12 / 12 : 0; // 1% mensual
+
+  // ============================================================
+  // MÓDULO 2 — DEDUCCIONES
+  // ============================================================
+  const salud = chk("inclSalud") ? devengadoBaseSS * 0.04 : 0;
+  const pension = chk("inclPension") ? devengadoBaseSS * 0.04 : 0;
+  const fondoSol = chk("inclFondoSol") && devengadoBaseSS > SMLMV_2026 * 4 ? devengadoBaseSS * 0.01 : 0;
+  const libranza = val("libranza");
+  const embargo = val("embargo");
+  const anticipo = val("anticipo");
+  const otrasDeduciones = val("otrasDeduciones");
+
+  const totalDeducciones = salud + pension + fondoSol + libranza + embargo + anticipo + otrasDeduciones;
+  const netoAPagar = totalDevengado - totalDeducciones;
+
+  // ============================================================
+  // RENDER
+  // ============================================================
+  const emp = v("employeeName").value || "Trabajador";
+  const totalHorasTrab = lastSummary.reduce((a,x)=>a+x.hours,0);
+  const extraHoras = lastSummary.filter(x=>x.concept.startsWith("Extra")).reduce((a,x)=>a+x.hours,0);
+  const nightHours = lastSummary.filter(x=>x.concept.includes("nocturna")||x.concept.includes("nocturno")).reduce((a,x)=>a+x.hours,0);
+
+  v("resultTitle").textContent = `Liquidación — ${emp}`;
+
+  v("summary").innerHTML = `
+    <div class="metric"><div class="k">Horas trabajadas</div><div class="v">${num(totalHorasTrab)}</div><div class="s">En el periodo</div></div>
+    <div class="metric"><div class="k">H. extras</div><div class="v">${num(extraHoras)}</div><div class="s">Diurnas + nocturnas</div></div>
+    <div class="metric"><div class="k">H. nocturnas</div><div class="v">${num(nightHours)}</div><div class="s">Desde 7:00 p.m.</div></div>
+    <div class="metric highlight"><div class="k">Neto a pagar</div><div class="v">${money(netoAPagar)}</div><div class="s">Devengado − deducciones</div></div>
+  `;
+
+  // COLILLA
+  v("colilla").innerHTML = `
+    <!-- DEVENGADO -->
+    <div class="liq-section">
+      <div class="liq-section-header"><span class="mod-badge mod-1">+</span><span>Devengado</span></div>
+      <div class="liq-section-body">
+        <div class="liq-row"><span class="concept">Salario base (${diasTrab}/30 días)</span><span class="amount">${money(salarioProporcional)}</span></div>
+        ${auxTransporte>0?`<div class="liq-row sub"><span class="concept">Auxilio de transporte</span><span class="amount">${money(auxTransporte)}</span></div>`:''}
+        ${extraHorasValor>0?`<div class="liq-row sub"><span class="concept">Recargos y horas extras</span><span class="amount">${money(extraHorasValor)}</span></div>`:''}
+        ${comisiones>0?`<div class="liq-row sub"><span class="concept">Comisiones</span><span class="amount">${money(comisiones)}</span></div>`:''}
+        ${bonificaciones>0?`<div class="liq-row sub"><span class="concept">Bonificaciones</span><span class="amount">${money(bonificaciones)}</span></div>`:''}
+        ${otrosIngresos>0?`<div class="liq-row sub"><span class="concept">Otros ingresos</span><span class="amount">${money(otrosIngresos)}</span></div>`:''}
+        <div class="liq-row total-row"><span class="concept">Total devengado</span><span class="amount">${money(totalDevengado)}</span></div>
+      </div>
+    </div>
+
+    <!-- DEDUCCIONES -->
+    <div class="liq-section">
+      <div class="liq-section-header"><span class="mod-badge mod-2">−</span><span>Deducciones</span></div>
+      <div class="liq-section-body">
+        ${salud>0?`<div class="liq-row deduccion"><span class="concept">Salud (4% s/ ${money(devengadoBaseSS)})</span><span class="amount">(${money(salud)})</span></div>`:''}
+        ${pension>0?`<div class="liq-row deduccion"><span class="concept">Pensión (4%)</span><span class="amount">(${money(pension)})</span></div>`:''}
+        ${fondoSol>0?`<div class="liq-row deduccion"><span class="concept">Fondo solidaridad pensional (1%)</span><span class="amount">(${money(fondoSol)})</span></div>`:''}
+        ${libranza>0?`<div class="liq-row deduccion"><span class="concept">Libranza / crédito</span><span class="amount">(${money(libranza)})</span></div>`:''}
+        ${embargo>0?`<div class="liq-row deduccion"><span class="concept">Embargo judicial</span><span class="amount">(${money(embargo)})</span></div>`:''}
+        ${anticipo>0?`<div class="liq-row deduccion"><span class="concept">Anticipo de nómina</span><span class="amount">(${money(anticipo)})</span></div>`:''}
+        ${otrasDeduciones>0?`<div class="liq-row deduccion"><span class="concept">Otras deducciones</span><span class="amount">(${money(otrasDeduciones)})</span></div>`:''}
+        ${totalDeducciones===0?`<div class="liq-row sub"><span class="concept">Sin deducciones registradas</span><span class="amount">—</span></div>`:''}
+        <div class="liq-row total-row"><span class="concept">Total deducciones</span><span class="amount">${money(totalDeducciones)}</span></div>
+      </div>
+    </div>
+
+    <!-- NETO -->
+    <div class="liq-section">
+      <div class="liq-section-body">
+        <div class="liq-row neto"><span class="concept">✓ NETO A PAGAR</span><span class="amount">${money(netoAPagar)}</span></div>
+      </div>
+    </div>
+
+    <!-- PROVISIONES INFORMATIVAS -->
+    ${(provVacaciones+provPrima+provCesantias+provIntCesantias)>0?`
+    <div class="liq-section" style="opacity:.85">
+      <div class="liq-section-header"><span class="mod-badge mod-0">i</span><span>Provisiones del mes (costo empresa — no se pagan ahora)</span></div>
+      <div class="liq-section-body">
+        ${provVacaciones>0?`<div class="liq-row sub"><span class="concept">Provisión vacaciones (4.17%)</span><span class="amount">${money(provVacaciones)}</span></div>`:''}
+        ${provPrima>0?`<div class="liq-row sub"><span class="concept">Provisión prima (8.33%)</span><span class="amount">${money(provPrima)}</span></div>`:''}
+        ${provCesantias>0?`<div class="liq-row sub"><span class="concept">Provisión cesantías (8.33%)</span><span class="amount">${money(provCesantias)}</span></div>`:''}
+        ${provIntCesantias>0?`<div class="liq-row sub"><span class="concept">Provisión int. cesantías (1% men.)</span><span class="amount">${money(provIntCesantias)}</span></div>`:''}
+        <div class="liq-row"><span class="concept" style="font-weight:700">Total provisiones</span><span class="amount" style="font-family:var(--font-mono);font-weight:700">${money(provVacaciones+provPrima+provCesantias+provIntCesantias)}</span></div>
+      </div>
+    </div>`:''}
+  `;
+
+  // ALERTAS
+  v("alerts").innerHTML = alerts.length
+    ? `<div class="notes" style="margin-bottom:12px">${alerts.map(a=>`<p style="margin-bottom:4px"><span class="pill ${a.type}">Alerta</span> ${a.msg}</p>`).join("")}</div>`
+    : `<p style="margin-bottom:12px"><span class="pill good">✓ Sin alertas legales</span></p>`;
+
+  // TABLA RESUMEN HORAS
+  v("summaryRows").innerHTML = lastSummary.map(x=>`
+    <tr>
+      <td>${x.concept}</td>
+      <td class="num">${num(x.hours)}</td>
+      <td class="num">${Math.round(x.pct*100)}%</td>
+      <td class="num">${money(x.additional)}</td>
+      <td class="num">${money(x.total)}</td>
+    </tr>
+  `).join("") || `<tr><td colspan="5">Sin datos para el periodo.</td></tr>`;
+
+  // TABLA DETALLE
+  v("detailRows").innerHTML = lastDetails.map(x=>`
+    <tr>
+      <td>${x.fecha}</td><td>${x.dia}</td><td>${x.semana}</td><td>${x.turno}</td><td>${x.clasificacion}</td>
+      <td class="num">${num(x.horas)}</td><td class="num">${money(x.baseHora)}</td><td class="num">${money(x.adicional)}</td>
+      <td>${x.alerta?`<span class="pill ${x.alerta.includes('Excede')?'warn':'info'}">${x.alerta}</span>`:""}</td>
+    </tr>
+  `).join("") || `<tr><td colspan="9">Sin detalle.</td></tr>`;
+}
+
+// ============================================================
+// EVENTOS Y UTILIDADES
+// ============================================================
+function showTab(name){
+  ["resumen","detalle","normativa"].forEach(t=>{
+    v(`tab-${t}`).classList.toggle("hidden",t!==name);
+  });
+  document.querySelectorAll(".tab").forEach(tab=>tab.classList.remove("active"));
+  [...document.querySelectorAll(".tab")].find(t=>t.textContent.toLowerCase().includes(
+    name==="resumen"?"resumen":name==="detalle"?"detalle":"normativa"
+  ))?.classList.add("active");
+}
+
+function applyPeriodPreset(){
+  const type=v("periodType").value, month=v("monthBase").value;
+  if(type==="custom"||!month) return;
+  const [y,m]=month.split("-").map(Number);
+  const last=new Date(y,m,0).getDate();
+  let start=`${y}-${pad(m)}-01`, end=`${y}-${pad(m)}-${pad(last)}`;
+  if(type==="quincena1") end=`${y}-${pad(m)}-15`;
+  if(type==="quincena2") start=`${y}-${pad(m)}-16`;
+  v("startDate").value=start; v("endDate").value=end;
+  v("calendarYear").value=y;
+  const sd=parseDate(start), mon=addDays(sd,-((sd.getDay()+6)%7));
+  const w1=v("week1Monday"); if(w1) w1.value=fmtDate(mon);
+}
+
+function downloadCSV(){
+  const headers=["fecha","dia","semana","turno","clasificacion","horas","baseHora","adicional","porcentajeRecargo","alerta"];
+  const lines=[headers.join(";")].concat(lastDetails.map(d=>[
+    d.fecha,d.dia,d.semana,d.turno,d.clasificacion,d.horas.toFixed(2),Math.round(d.baseHora),Math.round(d.adicional),Math.round(d.pct*100)+"%",d.alerta
+  ].map(vv=>String(vv).replaceAll(";"," ")).join(";")));
+  const blob=new Blob([lines.join("\n")],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="nomina_colombia_2026.csv"; a.click(); URL.revokeObjectURL(a.href);
+}
+
+v("periodType").addEventListener("change",applyPeriodPreset);
+v("monthBase").addEventListener("change",applyPeriodPreset);
+v("weekMode").addEventListener("change",()=>{
+  v("relativeWeekBlock").classList.toggle("hidden",v("weekMode").value!=="relative");
+  calculate();
+});
+v("calendarYear").addEventListener("change",calculate);
+v("fileInput").addEventListener("change",ev=>{
+  const file=ev.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{v("csvInput").value=e.target.result; calculate();};
+  reader.readAsText(file,"utf-8");
+});
+
+// Recalcular al cambiar cualquier input de módulo 1 y 2
+["salary","diasTrabajados","diasVacaciones","comisiones","bonificaciones","otrosIngresos",
+ "libranza","embargo","anticipo","otrasDeduciones"].forEach(id=>{
+  v(id).addEventListener("change",calculate);
+});
+["includeTransporte","salarioIntegral","inclVacaciones","inclPrima","inclCesantias","inclIntCesantias",
+ "inclSalud","inclPension","inclFondoSol","includeHolidays","useSundayAsRest"].forEach(id=>{
+  v(id).addEventListener("change",calculate);
+});
+
+calculate();
+</script>
+</body>
+</html>
