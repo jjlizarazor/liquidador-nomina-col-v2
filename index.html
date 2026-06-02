@@ -4,838 +4,828 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Liquidador de Nómina Colombia 2026</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:#f0f2f5; --card:#ffffff; --text:#0f1923; --muted:#6b7a8d; --line:#dde2ea;
-      --brand:#1a56db; --brand-dark:#1040b0; --teal:#0f766e; --warn:#b45309; --bad:#b91c1c; --good:#047857;
-      --soft:#eef3ff; --shadow:0 2px 12px rgba(15,25,35,.07);
-      --font-body:'IBM Plex Sans',sans-serif; --font-mono:'IBM Plex Mono',monospace;
-      --radius:14px; --radius-sm:8px;
+    :root{
+      --bg:#f0f2f5;--card:#fff;--text:#0f1923;--muted:#6b7a8d;--line:#dde2ea;
+      --brand:#1a56db;--brand-dark:#1040b0;--teal:#0f766e;--warn:#b45309;--bad:#b91c1c;--good:#047857;
+      --shadow:0 2px 12px rgba(15,25,35,.07);
+      --font:'IBM Plex Sans',sans-serif;--mono:'IBM Plex Mono',monospace;
+      --r:14px;--rs:8px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:var(--font-body);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
 
     /* HEADER */
-    header{background:var(--text);color:#fff;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-    header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+    header{background:var(--text);color:#fff;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    header h1{font-size:19px;font-weight:700}
     header h1 span{color:#60a5fa}
-    .header-tags{display:flex;gap:8px;flex-wrap:wrap}
-    .htag{font-size:11px;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:var(--font-mono)}
+    .htags{display:flex;gap:6px;flex-wrap:wrap}
+    .htag{font-size:10px;padding:2px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.65);font-family:var(--mono)}
 
     /* LAYOUT */
-    main{max-width:1380px;margin:0 auto;padding:20px}
-    .layout{display:grid;grid-template-columns:400px 1fr;gap:18px;align-items:start}
+    main{max-width:1400px;margin:0 auto;padding:18px}
+    .layout{display:grid;grid-template-columns:420px 1fr;gap:16px;align-items:start}
+    @media(max-width:1000px){.layout{grid-template-columns:1fr}}
 
     /* CARDS */
-    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .card-header{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
-    .card-header h2{font-size:15px;font-weight:700;flex:1}
-    .card-body{padding:18px}
-    .card-body + .card-body{border-top:1px solid var(--line)}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+    .card-header{padding:13px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+    .card-header h2{font-size:14px;font-weight:700;flex:1}
+    .card-body{padding:16px}
 
-    /* MODULE BADGE */
-    .mod-badge{font-size:10px;font-family:var(--font-mono);font-weight:600;padding:2px 8px;border-radius:4px;text-transform:uppercase}
-    .mod-0{background:#e0e7ff;color:#3730a3}
-    .mod-1{background:#d1fae5;color:#065f46}
-    .mod-2{background:#fee2e2;color:#991b1b}
-
-    /* SECTION LABELS */
-    .section-title{font-size:11px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-    .section-title:first-child{margin-top:0}
+    /* MODULE TOGGLE */
+    .mod-toggle{display:flex;align-items:center;gap:8px;padding:10px 18px;background:#f8f9fb;border-bottom:1px solid var(--line)}
+    .mod-toggle label{font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px}
+    .mod-toggle input[type=checkbox]{accent-color:var(--brand);width:15px;height:15px}
+    .mod-badge{font-size:10px;font-family:var(--mono);font-weight:600;padding:2px 7px;border-radius:4px;text-transform:uppercase}
+    .m0{background:#e0e7ff;color:#3730a3}.m1{background:#d1fae5;color:#065f46}.m2{background:#fee2e2;color:#991b1b}
+    .mod-body{transition:opacity .2s}
+    .mod-body.disabled{opacity:.4;pointer-events:none}
 
     /* FORM */
-    label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.04em}
-    input,select,textarea{width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);padding:9px 12px;background:#fff;color:var(--text);font:inherit;font-size:13px;transition:border .15s}
-    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand)}
-    textarea{min-height:160px;font-family:var(--font-mono);font-size:12px;resize:vertical}
-    input[type="checkbox"]{width:auto;margin-right:6px;accent-color:var(--brand)}
-    .check-label{display:flex;align-items:center;font-size:13px;font-weight:400;color:var(--text);margin:8px 0;text-transform:none;letter-spacing:0;cursor:pointer}
+    label.lbl{display:block;font-size:11px;font-weight:600;color:var(--muted);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.05em}
+    input,select{width:100%;border:1px solid var(--line);border-radius:var(--rs);padding:8px 11px;background:#fff;color:var(--text);font:inherit;font-size:13px;transition:border .15s}
+    input:focus,select:focus{outline:none;border-color:var(--brand)}
+    input[type=checkbox]{width:auto}
+    .chk-label{display:flex;align-items:center;gap:7px;font-size:13px;margin:7px 0;cursor:pointer}
+    .chk-label input{accent-color:var(--brand);width:14px;height:14px}
     .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-    .hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:5px}
-    .file-area{border:1px dashed var(--line);padding:12px;border-radius:var(--radius-sm);background:#fafbfc}
+    .hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:4px}
+    .sec{font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+    .sec:first-child{margin-top:0}
 
     /* BUTTONS */
-    .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-    button{border:0;border-radius:var(--radius-sm);padding:9px 16px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s,background .15s}
-    .btn-primary{background:var(--brand);color:white}
-    .btn-primary:hover{background:var(--brand-dark)}
-    .btn-secondary{background:#e8edf7;color:var(--text)}
-    .btn-secondary:hover{background:#d5ddf0}
-    .btn-ghost{background:#fff;border:1px solid var(--line);color:var(--text)}
-    .btn-ghost:hover{background:#f5f7fa}
-    .btn-teal{background:var(--teal);color:white}
+    .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    button{border:0;border-radius:var(--rs);padding:9px 16px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s,background .15s}
+    .btn-p{background:var(--brand);color:#fff}.btn-p:hover{background:var(--brand-dark)}
+    .btn-s{background:#e8edf7;color:var(--text)}.btn-s:hover{background:#d5ddf0}
+    .btn-g{background:#fff;border:1px solid var(--line);color:var(--text)}.btn-g:hover{background:#f5f7fa}
 
-    /* METRICS */
-    .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
-    .metric{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px}
-    .metric .k{font-size:11px;font-family:var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-    .metric .v{font-size:22px;font-weight:700;margin-top:4px;font-family:var(--font-mono)}
-    .metric .s{font-size:11px;color:var(--muted);margin-top:2px}
-    .metric.highlight{background:var(--text);border-color:var(--text)}
-    .metric.highlight .k{color:rgba(255,255,255,.6)}
-    .metric.highlight .v{color:#fff}
-    .metric.highlight .s{color:rgba(255,255,255,.5)}
-    .metric.good-bg{background:#f0fdf4;border-color:#bbf7d0}
-    .metric.good-bg .v{color:var(--good)}
-    .metric.bad-bg{background:#fff1f2;border-color:#fecdd3}
-    .metric.bad-bg .v{color:var(--bad)}
+    /* ======================== CALENDARIO ======================== */
+    .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .cal-nav span{font-size:15px;font-weight:700;text-transform:capitalize}
+    .cal-nav button{background:none;border:1px solid var(--line);border-radius:6px;padding:4px 12px;font-size:14px;cursor:pointer;color:var(--text)}
+    .cal-nav button:hover{background:var(--bg)}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+    .cal-dow{text-align:center;font-size:10px;font-family:var(--mono);font-weight:600;color:var(--muted);text-transform:uppercase;padding:4px 0;letter-spacing:.05em}
+    .cal-day{border:1px solid var(--line);border-radius:6px;padding:4px;min-height:62px;cursor:pointer;background:#fff;transition:border-color .15s,background .15s;position:relative;font-size:11px}
+    .cal-day:hover{border-color:var(--brand);background:#f0f5ff}
+    .cal-day.other-month{background:#f8f9fb;opacity:.45;pointer-events:none}
+    .cal-day.is-holiday{background:#fff7ed;border-color:#fed7aa}
+    .cal-day.is-sunday{background:#f0fdf4}
+    .cal-day.has-shift{background:#eff6ff;border-color:#93c5fd}
+    .cal-day.selected{border-color:var(--brand);background:#e0eaff;box-shadow:0 0 0 2px #bfdbfe}
+    .cal-day.is-rest{background:#f1f5f9;opacity:.7}
+    .cal-day-num{font-weight:700;color:var(--text);font-size:12px;margin-bottom:3px;display:flex;justify-content:space-between;align-items:center}
+    .cal-day-num .hol-dot{width:6px;height:6px;border-radius:50%;background:#f97316;display:inline-block}
+    .cal-shift{font-size:9px;font-family:var(--mono);color:var(--brand);font-weight:600;line-height:1.3}
+    .cal-hours{font-size:9px;color:var(--muted);font-family:var(--mono)}
+    .cal-rest-label{font-size:9px;color:var(--muted);font-style:italic;margin-top:4px}
+    .cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:11px;color:var(--muted)}
+    .cal-legend span{display:flex;align-items:center;gap:4px}
+    .dot{width:8px;height:8px;border-radius:2px;display:inline-block}
 
-    /* LIQUIDACION BLOCKS */
-    .liq-section{background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--line);margin-bottom:12px;overflow:hidden}
-    .liq-section-header{padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
-    .liq-section-header span{font-size:12px;font-weight:700;flex:1}
-    .liq-section-body{padding:0}
-    .liq-row{display:grid;grid-template-columns:1fr auto;padding:8px 14px;border-bottom:1px solid var(--line);font-size:13px}
+    /* PANEL TURNO */
+    .shift-panel{background:#f0f5ff;border:1px solid #93c5fd;border-radius:var(--rs);padding:14px;margin-top:10px}
+    .shift-panel h3{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--brand)}
+    .shift-panel .row2{gap:8px}
+    .shift-actions{display:flex;gap:8px;margin-top:10px}
+    .btn-confirm{background:var(--brand);color:#fff;border:0;border-radius:6px;padding:7px 16px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+    .btn-confirm:hover{background:var(--brand-dark)}
+    .btn-rest{background:#e2e8f0;color:var(--text);border:0;border-radius:6px;padding:7px 14px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+    .btn-clear{background:#fee2e2;color:var(--bad);border:0;border-radius:6px;padding:7px 14px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+    .btn-clear:hover{background:#fecdd3}
+
+    /* RESULTADO */
+    .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+    .metric{background:var(--bg);border:1px solid var(--line);border-radius:var(--rs);padding:12px}
+    .metric .k{font-size:10px;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+    .metric .v{font-size:20px;font-weight:700;margin-top:3px;font-family:var(--mono)}
+    .metric .s{font-size:10px;color:var(--muted);margin-top:1px}
+    .metric.dark{background:var(--text);border-color:var(--text)}
+    .metric.dark .k{color:rgba(255,255,255,.55)}
+    .metric.dark .v{color:#fff}
+    .metric.dark .s{color:rgba(255,255,255,.4)}
+    .metric.green .v{color:var(--good)}
+    .metric.red .v{color:var(--bad)}
+
+    /* COLILLA */
+    .liq-block{background:var(--bg);border:1px solid var(--line);border-radius:var(--rs);margin-bottom:10px;overflow:hidden}
+    .liq-hdr{padding:9px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+    .liq-hdr span{font-size:12px;font-weight:700;flex:1}
+    .liq-row{display:grid;grid-template-columns:1fr auto;padding:7px 14px;border-bottom:1px solid var(--line);font-size:13px}
     .liq-row:last-child{border-bottom:0}
-    .liq-row .concept{color:var(--text)}
-    .liq-row .amount{font-family:var(--font-mono);font-weight:600;text-align:right}
-    .liq-row.sub .concept{color:var(--muted);font-size:12px;padding-left:12px}
+    .liq-row.sub .concept{color:var(--muted);font-size:12px;padding-left:14px}
     .liq-row.sub .amount{color:var(--muted);font-size:12px}
-    .liq-row.total-row{background:var(--text);padding:10px 14px}
-    .liq-row.total-row .concept{color:#fff;font-weight:700}
-    .liq-row.total-row .amount{color:#60a5fa;font-family:var(--font-mono);font-weight:700;font-size:16px}
+    .liq-row.totline{background:#f8f9fb}
+    .liq-row.totline .concept{font-weight:700}
+    .liq-row.totline .amount{font-family:var(--mono);font-weight:700}
+    .liq-row.ded .amount{color:var(--bad);font-family:var(--mono)}
     .liq-row.neto{background:var(--good);padding:12px 14px}
     .liq-row.neto .concept{color:#fff;font-weight:700;font-size:15px}
-    .liq-row.neto .amount{color:#fff;font-family:var(--font-mono);font-weight:700;font-size:18px}
-    .liq-row.deduccion .amount{color:var(--bad)}
+    .liq-row.neto .amount{color:#fff;font-family:var(--mono);font-weight:700;font-size:18px}
+    .liq-row.prov{background:#fafbfc}
+    .liq-row.prov .concept{color:var(--muted);font-size:12px}
+    .liq-row.prov .amount{color:var(--muted);font-family:var(--mono);font-size:12px}
 
     /* TABS */
-    .tabs{display:flex;gap:6px;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:0}
-    .tab{padding:8px 14px;border-radius:var(--radius-sm) var(--radius-sm) 0 0;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);background:none;border:1px solid transparent;border-bottom:none;position:relative;bottom:-1px}
+    .tabs{display:flex;gap:4px;margin-bottom:12px;border-bottom:1px solid var(--line);padding-bottom:0}
+    .tab{padding:7px 14px;border-radius:var(--rs) var(--rs) 0 0;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);background:none;border:1px solid transparent;border-bottom:none;position:relative;bottom:-1px}
     .tab.active{background:#fff;border-color:var(--line);color:var(--brand)}
     .hidden{display:none}
 
-    /* PILLS */
-    .pill{display:inline-flex;align-items:center;border-radius:999px;padding:2px 8px;font-size:11px;font-weight:700;font-family:var(--font-mono)}
-    .pill.warn{background:#fff7ed;color:var(--warn)}
-    .pill.bad{background:#fee2e2;color:var(--bad)}
-    .pill.good{background:#dcfce7;color:var(--good)}
-    .pill.info{background:#dbeafe;color:#1d4ed8}
-
     /* TABLES */
     table{width:100%;border-collapse:collapse;font-size:12px}
-    th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-    th{background:#f8f9fb;color:var(--muted);font-size:11px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+    th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+    th{background:#f8f9fb;color:var(--muted);font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;font-weight:600}
     tr:last-child td{border-bottom:0}
-    td.num{text-align:right;font-family:var(--font-mono)}
+    td.n{text-align:right;font-family:var(--mono)}
 
-    /* DIVIDER */
-    .divider{height:1px;background:var(--line);margin:16px 0}
+    /* PILLS */
+    .pill{display:inline-flex;align-items:center;border-radius:999px;padding:2px 8px;font-size:10px;font-weight:700;font-family:var(--mono)}
+    .pill.ok{background:#dcfce7;color:var(--good)}
+    .pill.warn{background:#fff7ed;color:var(--warn)}
+    .pill.bad{background:#fee2e2;color:var(--bad)}
+    .pill.info{background:#dbeafe;color:#1d4ed8}
 
-    /* NOTAS */
-    .notes{font-size:13px;color:#334155;line-height:1.6}
-    .notes ul{padding-left:18px;margin-top:8px}
-    .notes li{margin-bottom:6px}
+    .notes{font-size:12px;color:#334155;line-height:1.7}
+    .notes ul{padding-left:16px}
+    .notes li{margin-bottom:5px}
 
-    /* COLILLA IMPRIMIBLE */
-    @media print {
-      body{background:#fff;font-size:12px}
+    @media print{
       header,.no-print{display:none!important}
       main{padding:0;max-width:none}
       .layout{display:block}
-      .card{box-shadow:none;border:1px solid #ccc;margin-bottom:16px}
-      .input-card{display:none!important}
-      table{page-break-inside:auto}
-      tr{page-break-inside:avoid}
+      .card{box-shadow:none;border:1px solid #ccc;margin-bottom:12px}
     }
-    @media(max-width:980px){.layout{grid-template-columns:1fr}.metrics-grid{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
 
 <header>
   <div>
-    <h1>Liquidador de <span>Nómina</span> Colombia</h1>
-    <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px">Horas · Devengado · Deducciones · Neto a pagar</div>
+    <h1>Liquidador de <span>Nómina</span> — Colombia</h1>
+    <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">Horas · Devengado · Deducciones · Neto a pagar</div>
   </div>
-  <div class="header-tags">
+  <div class="htags">
     <span class="htag">Ley 2101/2021</span>
     <span class="htag">Ley 2466/2025</span>
-    <span class="htag">CST Art. 158–179</span>
-    <span class="htag">Solo navegador · sin internet</span>
+    <span class="htag">CST Art.158–179</span>
+    <span class="htag">Solo navegador</span>
   </div>
 </header>
 
 <main>
 <div class="layout">
 
-  <!-- ========== PANEL IZQUIERDO ========== -->
-  <div class="input-card no-print">
+<!-- ============ COLUMNA IZQUIERDA ============ -->
+<div class="no-print">
 
-    <!-- MÓDULO 0: HORARIO Y HORAS -->
-    <div class="card" style="margin-bottom:14px">
-      <div class="card-header">
-        <span class="mod-badge mod-0">Módulo 0</span>
-        <h2>Horario y periodo</h2>
-      </div>
-      <div class="card-body">
-        <label>Nombre del trabajador</label>
-        <input id="employeeName" value="Trabajador 1">
-
-        <div class="row2" style="margin-top:10px">
-          <div>
-            <label>Periodo</label>
-            <select id="periodType">
-              <option value="mensual" selected>Mensualidad</option>
-              <option value="quincena1">Primera quincena</option>
-              <option value="quincena2">Segunda quincena</option>
-              <option value="custom">Personalizado</option>
-            </select>
-          </div>
-          <div>
-            <label>Mes base</label>
-            <input id="monthBase" type="month" value="2026-05">
-          </div>
+  <!-- DATOS GENERALES -->
+  <div class="card">
+    <div class="card-header"><h2>Datos del trabajador y periodo</h2></div>
+    <div class="card-body">
+      <div class="row2">
         </div>
-        <div class="row2" style="margin-top:10px">
-          <div><label>Fecha inicio</label><input id="startDate" type="date" value="2026-05-01"></div>
-          <div><label>Fecha fin</label><input id="endDate" type="date" value="2026-05-31"></div>
-        </div>
-        <div class="row2" style="margin-top:10px">
-          <div>
-            <label>Año calendario</label>
-            <input id="calendarYear" type="number" min="2020" max="2035" value="2026">
-          </div>
-          <div>
-            <label>Modo semana</label>
-            <select id="weekMode">
-              <option value="calendar" selected>Calendario regular</option>
-              <option value="relative">Relativo desde lunes</option>
-            </select>
-          </div>
-        </div>
-        <div id="relativeWeekBlock" class="hidden" style="margin-top:10px">
-          <label>Lunes de la Semana 1</label>
-          <input id="week1Monday" type="date" value="2026-01-05">
-        </div>
-
-        <div class="section-title">Jornada</div>
-        <div class="row2">
-          <div>
-            <label>Límite diario (h)</label>
-            <input id="dailyLimit" type="number" min="1" step="0.25" value="8">
-          </div>
-          <div>
-            <label>Jornada semanal</label>
-            <select id="weeklyMode">
-              <option value="auto">Auto Ley 2101</option>
-              <option value="44">Forzar 44 h</option>
-              <option value="42">Forzar 42 h</option>
-            </select>
-          </div>
-        </div>
-        <label class="check-label"><input id="includeHolidays" type="checkbox" checked>Aplicar festivos Colombia 2026</label>
-        <label class="check-label"><input id="useSundayAsRest" type="checkbox" checked>Domingos como descanso obligatorio</label>
-
-        <div class="section-title">Horario CSV</div>
-        <div class="file-area">
-          <label>Importar archivo CSV</label>
-          <input id="fileInput" type="file" accept=".csv,text/csv">
-          <div class="hint">Columnas: Semana,Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo,HrsSemanales</div>
-        </div>
-        <label style="margin-top:12px">Pegar / editar CSV</label>
-        <textarea id="csvInput">Semana,Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo,HrsSemanales
-Semana18,10:00-17:00,10:00-17:00,10:00-17:00,17:00-00:00,Díadelafamilia,Descanso,06:00-13:00,35
-Semana19,06:00-13:00,06:00-13:00,06:00-13:00,06:00-13:00,06:00-15:00,Descanso,06:00-13:00,44
-Semana20,06:00-13:00,06:00-13:00,06:00-13:00,06:00-13:00,06:00-15:00,06:00-13:00,Descanso,44
-Semana21,17:00-00:00,10:00-17:00,17:00-00:00,17:00-00:00,Descanso,17:00-00:00,17:00-00:00,42
-Semana22,17:00-00:00,10:00-17:00,17:00-00:00,15:00-00:00,Descanso,17:00-00:00,17:00-00:00,44</textarea>
-      </div>
-    </div>
-
-    <!-- MÓDULO 1: DEVENGADO ADICIONAL -->
-    <div class="card" style="margin-bottom:14px">
-      <div class="card-header">
-        <span class="mod-badge mod-1">Módulo 1</span>
-        <h2>Devengado adicional</h2>
-      </div>
-      <div class="card-body">
-        <div class="section-title">Salario</div>
-        <label>Salario mensual base (COP)</label>
-        <input id="salary" type="number" min="0" step="1000" value="1423500">
-        <div class="hint">SMLMV 2026: $1.423.500 · Aux. transporte: $200.000 (si gana ≤ 2 SMLMV)</div>
-
-        <label class="check-label" style="margin-top:10px"><input id="includeTransporte" type="checkbox" checked>Incluir auxilio de transporte automático</label>
-        <label class="check-label"><input id="salarioIntegral" type="checkbox">Salario integral (≥ 13 SMLMV — sin aux. transporte)</label>
-
-        <div class="section-title">Provisiones mensuales</div>
-        <div class="hint" style="margin-bottom:10px">Estas provisiones muestran cuánto se "acumula" cada mes para el trabajador, aunque se paguen en otras fechas.</div>
-
-        <div class="row2">
-          <div>
-            <label>Días trabajados en el mes</label>
-            <input id="diasTrabajados" type="number" min="0" max="31" value="30">
-          </div>
-          <div>
-            <label>Días de vacaciones gozadas</label>
-            <input id="diasVacaciones" type="number" min="0" max="30" value="0">
-          </div>
-        </div>
-
-        <label class="check-label" style="margin-top:10px"><input id="inclVacaciones" type="checkbox" checked>Provisión vacaciones (4.17% mensual)</label>
-        <label class="check-label"><input id="inclPrima" type="checkbox" checked>Provisión prima de servicios (8.33% mensual)</label>
-        <label class="check-label"><input id="inclCesantias" type="checkbox" checked>Provisión cesantías (8.33% mensual)</label>
-        <label class="check-label"><input id="inclIntCesantias" type="checkbox" checked>Provisión intereses s/ cesantías (1% mensual)</label>
-
-        <div class="section-title">Otros ingresos</div>
-        <div class="row2">
-          <div>
-            <label>Comisiones (COP)</label>
-            <input id="comisiones" type="number" min="0" value="0">
-          </div>
-          <div>
-            <label>Bonificaciones (COP)</label>
-            <input id="bonificaciones" type="number" min="0" value="0">
-          </div>
-        </div>
-        <label>Otros ingresos / concepto libre (COP)</label>
-        <input id="otrosIngresos" type="number" min="0" value="0">
-      </div>
-    </div>
-
-    <!-- MÓDULO 2: DEDUCCIONES -->
-    <div class="card" style="margin-bottom:14px">
-      <div class="card-header">
-        <span class="mod-badge mod-2">Módulo 2</span>
-        <h2>Deducciones del trabajador</h2>
-      </div>
-      <div class="card-body">
-        <div class="section-title">Seguridad social (sobre salario base)</div>
-        <div class="hint" style="margin-bottom:10px">Se aplican sobre el salario base + horas extras. Las provisiones no son base de SS.</div>
-        <label class="check-label"><input id="inclSalud" type="checkbox" checked>Salud — 4% a cargo del trabajador</label>
-        <label class="check-label"><input id="inclPension" type="checkbox" checked>Pensión — 4% a cargo del trabajador</label>
-        <label class="check-label"><input id="inclFondoSol" type="checkbox">Fondo solidaridad pensional (si gana &gt; 4 SMLMV)</label>
-
-        <div class="section-title">Otras deducciones</div>
-        <div class="row2">
-          <div>
-            <label>Libranza / crédito (COP)</label>
-            <input id="libranza" type="number" min="0" value="0">
-          </div>
-          <div>
-            <label>Embargo judicial (COP)</label>
-            <input id="embargo" type="number" min="0" value="0">
-          </div>
-        </div>
-        <div class="row2">
-          <div>
-            <label>Anticipo de nómina (COP)</label>
-            <input id="anticipo" type="number" min="0" value="0">
-          </div>
-          <div>
-            <label>Otras deducciones (COP)</label>
-            <input id="otrasDeduciones" type="number" min="0" value="0">
-          </div>
+        <div>
+          <label class="lbl">Año</label>
+          <input id="calYear" type="number" min="2020" max="2035" value="2026">
         </div>
       </div>
-    </div>
-
-    <div class="btns" style="margin-bottom:20px">
-      <button class="btn-primary" onclick="calculate()">⟳ Calcular nómina</button>
-      <button class="btn-secondary" onclick="downloadCSV()">↓ Exportar CSV</button>
-      <button class="btn-ghost" onclick="window.print()">⎙ Imprimir colilla</button>
-    </div>
-    <div class="hint" style="margin-bottom:20px">Este formulario funciona localmente en el navegador. No envía datos a internet.</div>
-  </div>
-
-  <!-- ========== PANEL DERECHO ========== -->
-  <div>
-    <div class="card">
-      <div class="card-header">
-        <h2 id="resultTitle">Resultado de liquidación</h2>
-      </div>
-      <div class="card-body">
-        <div id="alerts"></div>
-        <div class="metrics-grid" id="summary"></div>
-      </div>
-
-      <!-- LIQUIDACIÓN DETALLADA -->
-      <div class="card-body">
-        <div class="section-title" style="margin-top:0">Colilla de pago</div>
-        <div id="colilla"></div>
-      </div>
-
-      <!-- TABS DETALLE TÉCNICO -->
-      <div class="card-body">
-        <div class="tabs no-print">
-          <span class="tab active" onclick="showTab('resumen')">Resumen horas</span>
-          <span class="tab" onclick="showTab('detalle')">Detalle día a día</span>
-          <span class="tab" onclick="showTab('normativa')">Normativa</span>
+      <div class="row2" style="margin-top:10px">
+        <div>
+          <label class="lbl">Mes</label>
+          <select id="calMonth" onchange="renderCalendar()">
+            <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
+            <option value="3">Abril</option><option value="4" selected>Mayo</option><option value="5">Junio</option>
+            <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
+            <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
+          </select>
         </div>
-
-        <div id="tab-resumen">
-          <table>
-            <thead><tr><th>Concepto horas</th><th class="num">Horas</th><th class="num">Recargo</th><th class="num">Valor adicional</th><th class="num">Valor total</th></tr></thead>
-            <tbody id="summaryRows"></tbody>
-          </table>
-        </div>
-
-        <div id="tab-detalle" class="hidden">
-          <table>
-            <thead><tr><th>Fecha</th><th>Día</th><th>Semana</th><th>Turno</th><th>Clasificación</th><th class="num">Horas</th><th class="num">Base/h</th><th class="num">Adicional</th><th>Alertas</th></tr></thead>
-            <tbody id="detailRows"></tbody>
-          </table>
-        </div>
-
-        <div id="tab-normativa" class="hidden notes">
-          <h3 style="margin-bottom:10px">Reglas y normativa aplicada</h3>
-          <ul>
-            <li><strong>Jornada semanal:</strong> 44h desde jul 15/2025 · 42h desde jul 15/2026 (Ley 2101/2021)</li>
-            <li><strong>Jornada nocturna:</strong> 7:00 p.m. a 6:00 a.m. (Ley 2466/2025, vigente dic 25/2025)</li>
-            <li><strong>Recargo nocturno ordinario:</strong> +35% (Art. 168 CST)</li>
-            <li><strong>Extra diurna:</strong> +25% · Extra nocturna: +75% (Art. 168 CST)</li>
-            <li><strong>Dominical/festivo ordinario:</strong> +80% (2026) → +90% (2027) → +100% (2028+) (Ley 2466/2025)</li>
-            <li><strong>Valor hora:</strong> salario ÷ 220h (antes jul 2026) · salario ÷ 210h (desde jul 2026)</li>
-            <li><strong>Auxilio de transporte:</strong> $200.000/mes si salario ≤ 2 SMLMV ($2.847.000). No es base de SS.</li>
-            <li><strong>Provisión vacaciones:</strong> salario × 4.17% (15 días hábiles/año → Art. 186 CST)</li>
-            <li><strong>Provisión prima:</strong> (salario + aux. transporte) × 8.33% (Art. 306 CST)</li>
-            <li><strong>Provisión cesantías:</strong> (salario + aux. transporte) × 8.33% (Art. 249 CST)</li>
-            <li><strong>Intereses cesantías:</strong> cesantías × 12% anual → 1% mensual (Ley 52/1975)</li>
-            <li><strong>Salud trabajador:</strong> 4% · Pensión trabajador: 4% (Ley 100/1993). Base = salario devengado (sin provisiones, sin aux. transporte).</li>
-            <li><strong>Fondo solidaridad:</strong> 1% adicional si devengado &gt; 4 SMLMV ($5.694.000)</li>
-            <li><strong>Límite extras:</strong> máx. 2h/día y 12h/semana (Art. 167 CST)</li>
-          </ul>
+        <div>
+          <label class="lbl">Dom/festivo recargo</label>
+          <select id="recDom">
+            <option value="0.80" selected>80% (jul 2025–jun 2026)</option>
+            <option value="0.90">90% (jul 2026–jun 2027)</option>
+            <option value="1.00">100% (desde jul 2027)</option>
+          </select>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- MÓDULO 0: CALENDARIO -->
+  <div class="card">
+    <div class="mod-toggle">
+      <input type="checkbox" id="mod0on" checked onchange="toggleMod(0)">
+      <label for="mod0on" style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700">
+        <span class="mod-badge m0">Módulo 0</span> Horario trabajado
+      </label>
+    </div>
+    <div class="mod-body" id="mod0body">
+      <div class="card-body">
+        <div class="cal-nav">
+          <button onclick="changeMonth(-1)">&#8249;</button>
+          <span id="calTitle"></span>
+          <button onclick="changeMonth(1)">&#8250;</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend">
+          <span><span class="dot" style="background:#eff6ff;border:1px solid #93c5fd"></span>Con turno</span>
+          <span><span class="dot" style="background:#f1f5f9;border:1px solid var(--line)"></span>Descanso</span>
+          <span><span class="dot" style="background:#fff7ed;border:1px solid #fed7aa"></span>Festivo</span>
+          <span><span class="dot" style="background:#f0fdf4;border:1px solid var(--line)"></span>Domingo</span>
+        </div>
+        <div id="shiftPanel" class="shift-panel hidden">
+          <h3 id="shiftPanelTitle">Turno del día</h3>
+          <div class="row2">
+            <div><label class="lbl">Entrada</label><input type="time" id="shiftIn" value="07:00"></div>
+            <div><label class="lbl">Salida</label><input type="time" id="shiftOut" value="16:00"></div>
+          </div>
+          <label class="chk-label" style="margin-top:8px"><input type="checkbox" id="shiftDom"> Marcar como dominical / festivo trabajado</label>
+          <div class="shift-actions">
+            <button class="btn-confirm" onclick="confirmShift()">✓ Guardar turno</button>
+            <button class="btn-rest" onclick="markRest()">&#9675; Descanso</button>
+            <button class="btn-clear" onclick="clearShift()">✕ Borrar</button>
+          </div>
+        </div>
+        <p class="hint" style="margin-top:10px">Haz clic en cualquier día para registrar el turno · Los festivos se detectan automáticamente</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 1: DEVENGADO -->
+  <div class="card">
+    <div class="mod-toggle">
+      <input type="checkbox" id="mod1on" checked onchange="toggleMod(1)">
+      <label for="mod1on" style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700">
+        <span class="mod-badge m1">Módulo 1</span> Devengado adicional
+      </label>
+    </div>
+    <div class="mod-body" id="mod1body">
+      <div class="card-body">
+        <div class="sec">Parámetros</div>
+        <label class="chk-label"><input type="checkbox" id="inclAuxT" checked> Auxilio de transporte automático ($200.000 si salario ≤ 2 SMLMV)</label>
+        <label class="chk-label"><input type="checkbox" id="salIntegral"> Salario integral (≥ 13 SMLMV — sin aux. transporte)</label>
+        <div class="row2" style="margin-top:10px">
+          <div><label class="lbl">Días trabajados en el mes</label><input id="diasTrab" type="number" min="0" max="31" value="30"></div>
+          <div><label class="lbl">Días vacaciones gozadas</label><input id="diasVac" type="number" min="0" max="30" value="0"></div>
+        </div>
+        <div class="sec">Provisiones</div>
+        <label class="chk-label"><input type="checkbox" id="pVac" checked> Provisión vacaciones (4.17%)</label>
+        <label class="chk-label"><input type="checkbox" id="pPrima" checked> Provisión prima de servicios (8.33%)</label>
+        <label class="chk-label"><input type="checkbox" id="pCes" checked> Provisión cesantías (8.33%)</label>
+        <label class="chk-label"><input type="checkbox" id="pIntCes" checked> Provisión intereses cesantías (1% mensual)</label>
+        <div class="sec">Otros ingresos</div>
+        <div class="row3">
+          <div><label class="lbl">Comisiones</label><input id="comisiones" type="number" min="0" value="0"></div>
+          <div><label class="lbl">Bonificaciones</label><input id="bonif" type="number" min="0" value="0"></div>
+          <div><label class="lbl">Otros ingresos</label><input id="otrosIng" type="number" min="0" value="0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 2: DEDUCCIONES -->
+  <div class="card">
+    <div class="mod-toggle">
+      <input type="checkbox" id="mod2on" checked onchange="toggleMod(2)">
+      <label for="mod2on" style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700">
+        <span class="mod-badge m2">Módulo 2</span> Deducciones
+      </label>
+    </div>
+    <div class="mod-body" id="mod2body">
+      <div class="card-body">
+        <div class="sec">Seguridad social (sobre salario devengado)</div>
+        <label class="chk-label"><input type="checkbox" id="dSalud" checked> Salud — 4% trabajador</label>
+        <label class="chk-label"><input type="checkbox" id="dPension" checked> Pensión — 4% trabajador</label>
+        <label class="chk-label"><input type="checkbox" id="dFondoSol"> Fondo solidaridad pensional (si gana &gt; 4 SMLMV)</label>
+        <div class="sec">Otras deducciones</div>
+        <div class="row2">
+          <div><label class="lbl">Libranza / crédito</label><input id="libranza" type="number" min="0" value="0"></div>
+          <div><label class="lbl">Embargo judicial</label><input id="embargo" type="number" min="0" value="0"></div>
+        </div>
+        <div class="row2" style="margin-top:8px">
+          <div><label class="lbl">Anticipo de nómina</label><input id="anticipo" type="number" min="0" value="0"></div>
+          <div><label class="lbl">Otras deducciones</label><input id="otrosDed" type="number" min="0" value="0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btns" style="margin-bottom:20px">
+    <button class="btn-p" onclick="calculate()">⟳ Calcular nómina</button>
+    <button class="btn-s" onclick="exportCSV()">↓ Exportar CSV</button>
+    <button class="btn-g" onclick="window.print()">⎙ Imprimir colilla</button>
+  </div>
 </div>
+
+<!-- ============ COLUMNA DERECHA ============ -->
+<div>
+  <div class="card">
+    <div class="card-header"><h2 id="resTitle">Resultado de liquidación</h2></div>
+    <div class="card-body">
+      <div id="alertsBox"></div>
+      <div class="metrics" id="metricsBox"></div>
+    </div>
+    <div class="card-body">
+      <div class="sec" style="margin-top:0">Colilla de pago</div>
+      <div id="colilla"></div>
+    </div>
+    <div class="card-body">
+      <div class="tabs no-print">
+        <span class="tab active" onclick="showTab('horas')">Detalle horas</span>
+        <span class="tab" onclick="showTab('dias')">Por día</span>
+        <span class="tab" onclick="showTab('norma')">Normativa</span>
+      </div>
+      <div id="tab-horas">
+        <table><thead><tr><th>Concepto</th><th class="n">Horas</th><th class="n">Recargo</th><th class="n">Adicional</th><th class="n">Total</th></tr></thead>
+        <tbody id="horasBody"></tbody></table>
+      </div>
+      <div id="tab-dias" class="hidden">
+        <table><thead><tr><th>Fecha</th><th>Día</th><th>Turno</th><th>Clasificación</th><th class="n">Horas</th><th class="n">Adicional</th><th>Nota</th></tr></thead>
+        <tbody id="diasBody"></tbody></table>
+      </div>
+      <div id="tab-norma" class="hidden notes">
+        <ul>
+          <li><strong>Jornada semanal:</strong> 44h desde jul 15/2025 · 42h desde jul 15/2026 (Ley 2101/2021)</li>
+          <li><strong>Jornada nocturna:</strong> 7:00 p.m. a 6:00 a.m. (Ley 2466/2025, vigente dic 25/2025)</li>
+          <li><strong>Recargo nocturno ordinario:</strong> +35% (Art. 168 CST)</li>
+          <li><strong>Extra diurna:</strong> +25% · Extra nocturna: +75% (Art. 168 CST)</li>
+          <li><strong>Dom./festivo ordinario:</strong> +80% (2026) → +90% (2027) → +100% (2028) (Ley 2466/2025)</li>
+          <li><strong>Valor hora:</strong> salario ÷ 220 h (44h/sem) · salario ÷ 210 h (42h/sem)</li>
+          <li><strong>Auxilio transporte:</strong> $200.000 si salario ≤ 2 SMLMV ($2.847.000). No es base SS.</li>
+          <li><strong>Prov. vacaciones:</strong> salario × 4.17% (Art. 186 CST)</li>
+          <li><strong>Prov. prima:</strong> (salario + aux.transp) × 8.33% (Art. 306 CST)</li>
+          <li><strong>Prov. cesantías:</strong> (salario + aux.transp) × 8.33% (Art. 249 CST)</li>
+          <li><strong>Int. cesantías:</strong> 12% anual → 1% mensual (Ley 52/1975)</li>
+          <li><strong>Salud/Pensión trabajador:</strong> 4% c/u sobre devengado (sin aux.transp, sin provisiones)</li>
+          <li><strong>Fondo solidaridad:</strong> 1% si devengado &gt; 4 SMLMV ($5.694.000)</li>
+          <li><strong>Límite extras:</strong> máx. 2h/día · 12h/semana (Art. 167 CST)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /layout -->
 </main>
 
 <script>
 // ============================================================
-// CONSTANTES Y CONFIGURACIÓN
+// CONSTANTES
 // ============================================================
-const SMLMV_2026 = 1423500;
-const AUX_TRANSPORTE_2026 = 200000;
+const SMLMV = 1423500, AUX_T = 200000;
+const DAYS_ES = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+const MONTHS_ES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 
-const dayCols = [
-  ["Lunes",1],["Martes",2],["Miercoles",3],["Jueves",4],["Viernes",5],["Sabado",6],["Domingo",0]
-];
-
-const holidays2026 = new Map([
-  ["2026-01-01","Año Nuevo"],["2026-01-12","Reyes Magos"],["2026-03-23","San José"],
-  ["2026-04-02","Jueves Santo"],["2026-04-03","Viernes Santo"],["2026-05-01","Día del Trabajo"],
-  ["2026-05-18","Ascensión"],["2026-06-08","Corpus Christi"],["2026-06-15","Sagrado Corazón"],
-  ["2026-06-29","San Pedro y San Pablo"],["2026-07-20","Independencia"],["2026-08-07","Boyacá"],
-  ["2026-08-17","Asunción"],["2026-10-12","Diversidad Étnica"],["2026-11-02","Todos los Santos"],
-  ["2026-11-16","Independencia Cartagena"],["2026-12-08","Inmaculada"],["2026-12-25","Navidad"]
+// Festivos Colombia 2026 (formato YYYY-MM-DD)
+const HOLIDAYS = new Set([
+  "2026-01-01","2026-01-12","2026-03-23","2026-04-02","2026-04-03",
+  "2026-05-01","2026-05-18","2026-06-08","2026-06-15","2026-06-29",
+  "2026-07-20","2026-08-07","2026-08-17","2026-10-12","2026-11-02",
+  "2026-11-16","2026-12-08","2026-12-25"
 ]);
 
-let lastDetails = [], lastSummary = [];
+// Estado del calendario
+let calYear = 2026, calMonth = 4; // mayo 2026
+let selectedDate = null;
+// dayData: clave "YYYY-MM-DD" → {type:"shift"|"rest", in:"HH:MM", out:"HH:MM", domFest:bool}
+let dayData = {};
 
 // ============================================================
 // UTILIDADES
 // ============================================================
 const pad = n => String(n).padStart(2,"0");
-const fmtDate = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-const parseDate = s => { const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d,0,0,0,0); };
-const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
-const diffHours = (a,b) => (b-a)/3600000;
+const fmtD = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parseD = s => { const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); };
+const $ = id => document.getElementById(id);
+const chk = id => $(id).checked;
+const num = id => parseFloat($(id).value)||0;
 const money = n => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(Math.round(n||0));
-const pct = n => (n*100).toFixed(1)+"%";
-const num = n => new Intl.NumberFormat("es-CO",{maximumFractionDigits:2}).format(n||0);
-const dayName = d => ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"][d.getDay()];
-const v = id => document.getElementById(id);
-const chk = id => document.getElementById(id).checked;
-const val = id => parseFloat(document.getElementById(id).value)||0;
+const fmtH = n => n.toFixed(2)+"h";
+const isHoliday = k => HOLIDAYS.has(k);
+const isSunday = d => new Date(d).getDay()===0;
 
 // ============================================================
-// LÓGICA DE HORAS (módulo 0 — igual que antes)
+// CALENDARIO — RENDER
 // ============================================================
-function weeklyLimitFor(date){
-  const m = v("weeklyMode").value;
-  if(m==="44") return 44; if(m==="42") return 42;
-  return date >= parseDate("2026-07-15") ? 42 : 44;
-}
-function monthlyDivisorFor(date){ return date >= parseDate("2026-07-15") ? 210 : 220; }
-function domRateFor(date){ const y=date.getFullYear(); if(y<=2025)return .80; if(y===2026)return .90; return 1.00; }
-function isHoliday(date){ return chk("includeHolidays") && holidays2026.has(fmtDate(date)); }
-function isSundayRest(date){ return chk("useSundayAsRest") && date.getDay()===0; }
-function conceptKey(extra,night,domFest){
-  if(extra&&domFest&&night) return "Extra nocturna dominical/festiva";
-  if(extra&&domFest&&!night) return "Extra diurna dominical/festiva";
-  if(extra&&night) return "Extra nocturna";
-  if(extra&&!night) return "Extra diurna";
-  if(!extra&&domFest&&night) return "Ordinaria nocturna dominical/festiva";
-  if(!extra&&domFest&&!night) return "Ordinaria diurna dominical/festiva";
-  if(!extra&&night) return "Recargo nocturno ordinario";
-  return "Ordinaria diurna";
-}
-function recargoPct(extra,night,domFest,date){
-  let p=0;
-  if(extra) p += night ? .75 : .25;
-  else if(night) p += .35;
-  if(domFest) p += domRateFor(date);
-  return p;
-}
-function additionalPay(hours,hourly,p,extra){ return hours*hourly*(extra?(1+p):p); }
-function getMondayOfISOWeek(year,week){
-  const jan4=new Date(year,0,4);
-  const jan4Day=(jan4.getDay()+6)%7;
-  const w1Mon=addDays(jan4,-jan4Day);
-  return addDays(w1Mon,(week-1)*7);
-}
-function weekStartForRow(row,index){
-  const weekNumber=Number((row.Semana||"").match(/\d+/)?.[0]||(index+1));
-  if(v("weekMode").value==="calendar"){
-    const year=Number(v("calendarYear").value||new Date().getFullYear());
-    return {weekNumber, weekStart:getMondayOfISOWeek(year,weekNumber)};
+function renderCalendar(){
+  calYear = parseInt($("calYear").value) || 2026;
+  calMonth = parseInt($("calMonth").value);
+  const title = `${MONTHS_ES[calMonth]} ${calYear}`;
+  $("calTitle").textContent = title;
+
+  const firstDay = new Date(calYear, calMonth, 1);
+  const lastDay = new Date(calYear, calMonth+1, 0);
+  // empezar en lunes (0=lunes…6=domingo en nuestra grilla)
+  let startDow = (firstDay.getDay()+6)%7;
+  const prevMonthLast = new Date(calYear, calMonth, 0).getDate();
+
+  const dows = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+  let html = dows.map(d=>`<div class="cal-dow">${d}</div>`).join("");
+
+  // días del mes anterior
+  for(let i=startDow-1;i>=0;i--){
+    html+=`<div class="cal-day other-month"><div class="cal-day-num">${prevMonthLast-i}</div></div>`;
   }
-  const w1Mon=parseDate(v("week1Monday").value);
-  return {weekNumber, weekStart:addDays(w1Mon,(weekNumber-1)*7)};
-}
-function parseCSV(text){
-  const lines=text.replace(/\r/g,"").split("\n").filter(l=>l.trim().length);
-  if(!lines.length) return [];
-  const headers=lines[0].split(",").map(h=>h.trim());
-  return lines.slice(1).map(line=>{ const cells=line.split(","); const obj={}; headers.forEach((h,i)=>obj[h]=(cells[i]||"").trim()); return obj; });
-}
-function parseShift(value,date){
-  const vv=(value||"").trim();
-  if(!vv||/^(descanso|noaplica|n\/a|na|-|)$/i.test(vv)) return [];
-  const chunks=vv.split(/[,+]/).map(x=>x.trim()).filter(Boolean);
-  const intervals=[];
-  for(const c of chunks){
-    const m=c.match(/^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$/);
-    if(!m) continue;
-    const start=new Date(date); start.setHours(Number(m[1]),Number(m[2]),0,0);
-    const end=new Date(date); end.setHours(Number(m[3]),Number(m[4]),0,0);
-    if(end<=start) end.setDate(end.getDate()+1);
-    intervals.push({start,end,raw:c});
+
+  // días del mes
+  for(let d=1;d<=lastDay.getDate();d++){
+    const date = new Date(calYear, calMonth, d);
+    const key = fmtD(date);
+    const data = dayData[key];
+    const hol = isHoliday(key);
+    const sun = isSunday(date);
+    let cls = "cal-day";
+    if(hol) cls+=" is-holiday";
+    else if(sun) cls+=" is-sunday";
+    if(data?.type==="shift") cls+=" has-shift";
+    if(data?.type==="rest") cls+=" is-rest";
+    if(key===selectedDate) cls+=" selected";
+
+    let inner = `<div class="cal-day-num">${d}${hol?'<span class="hol-dot"></span>':''}</div>`;
+    if(data?.type==="shift"){
+      const hrs = calcHoursRaw(data.in, data.out).toFixed(1);
+      inner += `<div class="cal-shift">${data.in}–${data.out}</div><div class="cal-hours">${hrs}h</div>`;
+    } else if(data?.type==="rest"){
+      inner += `<div class="cal-rest-label">Descanso</div>`;
+    }
+
+    html += `<div class="${cls}" onclick="selectDay('${key}')">${inner}</div>`;
   }
-  return intervals;
+
+  // completar última fila
+  const total = startDow + lastDay.getDate();
+  const rem = (7 - (total%7))%7;
+  for(let i=1;i<=rem;i++) html+=`<div class="cal-day other-month"><div class="cal-day-num">${i}</div></div>`;
+
+  $("calGrid").innerHTML = html;
 }
-function splitInterval(interval){
-  const points=[interval.start.getTime(),interval.end.getTime()];
-  let cursor=new Date(interval.start); cursor.setHours(0,0,0,0);
-  for(let i=-1;i<=2;i++){
-    const d=addDays(cursor,i);
-    [[6,0],[19,0],[24,0],[0,0]].forEach(([h,mm])=>{
-      const p=new Date(d); p.setHours(h,mm,0,0);
-      if(p>interval.start&&p<interval.end) points.push(p.getTime());
-    });
-  }
-  points.sort((a,b)=>a-b);
+
+function changeMonth(dir){
+  calMonth += dir;
+  if(calMonth>11){calMonth=0;calYear++;}
+  if(calMonth<0){calMonth=11;calYear--;}
+  $("calMonth").value = calMonth;
+  $("calYear").value = calYear;
+  renderCalendar();
+}
+
+function selectDay(key){
+  selectedDate = key;
+  const date = parseD(key);
+  const data = dayData[key];
+  const hol = isHoliday(key);
+  const sun = isSunday(date);
+  const dayLabel = `${DAYS_ES[date.getDay()]} ${date.getDate()} de ${MONTHS_ES[date.getMonth()]}`;
+  $("shiftPanelTitle").textContent = `📅 ${dayLabel}${hol?" 🔴 Festivo":sun?" (Domingo)":""}`;
+  $("shiftIn").value = data?.in || "07:00";
+  $("shiftOut").value = data?.out || "16:00";
+  $("shiftDom").checked = data?.domFest ?? (hol||sun);
+  $("shiftPanel").classList.remove("hidden");
+  renderCalendar();
+}
+
+function confirmShift(){
+  if(!selectedDate) return;
+  dayData[selectedDate]={type:"shift",in:$("shiftIn").value,out:$("shiftOut").value,domFest:chk("shiftDom")};
+  $("shiftPanel").classList.add("hidden");
+  selectedDate=null;
+  renderCalendar();
+}
+
+function markRest(){
+  if(!selectedDate) return;
+  dayData[selectedDate]={type:"rest"};
+  $("shiftPanel").classList.add("hidden");
+  selectedDate=null;
+  renderCalendar();
+}
+
+function clearShift(){
+  if(!selectedDate) return;
+  delete dayData[selectedDate];
+  $("shiftPanel").classList.add("hidden");
+  selectedDate=null;
+  renderCalendar();
+}
+
+// ============================================================
+// MÓDULO TOGGLES
+// ============================================================
+function toggleMod(n){
+  const on = chk(`mod${n}on`);
+  $(`mod${n}body`).classList.toggle("disabled", !on);
+}
+
+// ============================================================
+// CÁLCULO DE HORAS
+// ============================================================
+function calcHoursRaw(tin, tout){
+  const [ih,im]=tin.split(":").map(Number);
+  let [oh,om]=tout.split(":").map(Number);
+  let mins=(oh*60+om)-(ih*60+im);
+  if(mins<=0) mins+=1440;
+  return mins/60;
+}
+
+function splitSegments(tin, tout, date){
+  const [ih,im]=tin.split(":").map(Number);
+  let [oh,om]=tout.split(":").map(Number);
+  const start = new Date(date); start.setHours(ih,im,0,0);
+  const end = new Date(date); end.setHours(oh,om,0,0);
+  if(end<=start) end.setDate(end.getDate()+1);
+
+  // puntos de corte: 06:00, 19:00 y medianoche del día
+  const cuts=[];
+  const addCut=(h,m)=>{const p=new Date(date);p.setHours(h,m,0,0);if(p>start&&p<end)cuts.push(p.getTime());
+    const p2=new Date(date);p2.setDate(p2.getDate()+1);p2.setHours(h,m,0,0);if(p2>start&&p2<end)cuts.push(p2.getTime());};
+  addCut(6,0); addCut(19,0);
+
+  const pts=[start.getTime(),...new Set(cuts),end.getTime()].sort((a,b)=>a-b);
   const segs=[];
-  for(let i=0;i<points.length-1;i++){
-    const a=new Date(points[i]),b=new Date(points[i+1]);
-    const mid=new Date((a.getTime()+b.getTime())/2);
-    const hour=mid.getHours()+mid.getMinutes()/60;
-    const night=hour>=19||hour<6;
-    segs.push({start:a,end:b,hours:diffHours(a,b),night});
+  for(let i=0;i<pts.length-1;i++){
+    const a=new Date(pts[i]),b=new Date(pts[i+1]);
+    const mid=new Date((pts[i]+pts[i+1])/2);
+    const h=mid.getHours()+mid.getMinutes()/60;
+    segs.push({start:a,end:b,hours:(pts[i+1]-pts[i])/3600000,night:(h>=19||h<6)});
   }
   return segs;
 }
-function getWeekKey(date){
-  const d=new Date(date); d.setHours(0,0,0,0);
-  const monday=addDays(d,-((d.getDay()+6)%7));
-  return fmtDate(monday);
+
+function conceptKey(extra,night,domFest){
+  if(extra&&domFest&&night) return "Extra nocturna dominical/festiva";
+  if(extra&&domFest) return "Extra diurna dominical/festiva";
+  if(extra&&night) return "Extra nocturna";
+  if(extra) return "Extra diurna";
+  if(domFest&&night) return "Ordinaria nocturna dominical/festiva";
+  if(domFest) return "Ordinaria diurna dominical/festiva";
+  if(night) return "Recargo nocturno ordinario";
+  return "Ordinaria diurna";
 }
-function groupBy(arr,fn){ const m=new Map(); arr.forEach(x=>{const k=fn(x);if(!m.has(k))m.set(k,[]);m.get(k).push(x);}); return m; }
+
+function recargoRate(extra,night,domFest,recDom){
+  let p=0;
+  if(extra) p+=night?.75:.25;
+  else if(night) p+=.35;
+  if(domFest) p+=recDom;
+  return p;
+}
+
+function calcHours(mod0on){
+  // Devuelve {summary:Map, details:[], alerts:[]}
+  const summary=new Map(), details=[], alerts=[];
+  if(!mod0on) return {summary,details,alerts};
+
+  const salary=num("salary");
+  const horasSem=parseFloat($("horasSem").value)||44;
+  const horasMes=horasSem*4.333333;
+  const valorHora=salary/horasMes;
+  // Límite diario calculado automáticamente: horasSem / 5 (solo para alerta Art. 167 CST)
+  const dailyLimit=horasSem/5;
+  const recDom=parseFloat($("recDom").value)||.80;
+
+  // Agrupar días con turno por semana ISO
+  const weekMap=new Map();
+  Object.entries(dayData).filter(([,d])=>d.type==="shift").forEach(([key,d])=>{
+    const date=parseD(key);
+    const dow=(date.getDay()+6)%7; // 0=lun
+    const monday=new Date(date); monday.setDate(date.getDate()-dow); monday.setHours(0,0,0,0);
+    const wk=fmtD(monday);
+    if(!weekMap.has(wk)) weekMap.set(wk,[]);
+    weekMap.get(wk).push({key,date,data:d});
+  });
+
+  weekMap.forEach((days)=>{
+    days.sort((a,b)=>a.date-b.date);
+    // weekOrdAcc: horas ORDINARIAS acumuladas en la semana (sin contar extras)
+    let weekOrdAcc=0;
+
+    days.forEach(({key,date,data})=>{
+      const segs=splitSegments(data.in,data.out,date);
+      const hol=isHoliday(key);
+      const sun=isSunday(date);
+      const domFest=data.domFest||(hol||sun);
+      const nota=hol?"Festivo":sun?"Domingo":"";
+      // dayOrdAcc: horas ordinarias acumuladas HOY (para límite diario)
+      let dayOrdAcc=0;
+
+      segs.forEach(seg=>{
+        const segHours=seg.hours;
+        // Extras se determinan SOLO por límite semanal (CST Art. 159)
+        // El límite diario es solo referencia para alertas, no dispara extras
+        const weekOrdRemaining = Math.max(0, horasSem - weekOrdAcc - dayOrdAcc);
+        const ordAllowed = Math.min(segHours, weekOrdRemaining);
+        const extraHours = segHours - ordAllowed;
+
+        // Parte ordinaria del segmento
+        if(ordAllowed > 0.0001){
+          const p=recargoRate(false,seg.night,domFest,recDom);
+          const k=conceptKey(false,seg.night,domFest);
+          const addVal=ordAllowed*valorHora*p;
+          const totVal=ordAllowed*valorHora*(1+p);
+          if(!summary.has(k)) summary.set(k,{concept:k,hours:0,pct:p,add:0,total:0});
+          const s=summary.get(k); s.hours+=ordAllowed; s.add+=addVal; s.total+=totVal; s.pct=Math.max(s.pct,p);
+          details.push({fecha:key,dia:DAYS_ES[date.getDay()],turno:`${data.in}–${data.out}`,
+            clasificacion:k,horas:ordAllowed,adicional:addVal,nota});
+          dayOrdAcc+=ordAllowed;
+        }
+
+        // Parte extra del segmento
+        if(extraHours > 0.0001){
+          const p=recargoRate(true,seg.night,domFest,recDom);
+          const k=conceptKey(true,seg.night,domFest);
+          const addVal=extraHours*valorHora*(1+p); // extras: se paga la hora completa + recargo
+          const totVal=addVal;
+          if(!summary.has(k)) summary.set(k,{concept:k,hours:0,pct:p,add:0,total:0});
+          const s=summary.get(k); s.hours+=extraHours; s.add+=addVal; s.total+=totVal; s.pct=Math.max(s.pct,p);
+          details.push({fecha:key,dia:DAYS_ES[date.getDay()],turno:`${data.in}–${data.out}`,
+            clasificacion:k,horas:extraHours,adicional:addVal,nota});
+        }
+      });
+
+      weekOrdAcc+=dayOrdAcc;
+      // Alertas legales
+      const dayTotal=segs.reduce((a,s)=>a+s.hours,0);
+      const dayExtra=Math.max(0,dayTotal-dailyLimit);
+      if(dayExtra>2+0.01) alerts.push({msg:`${key}: extras diarias superan 2h (${dayExtra.toFixed(1)}h extra)`});
+    });
+
+    const weekTotal=days.reduce((a,{data})=>a+calcHoursRaw(data.in,data.out),0);
+    const weekExtra=Math.max(0,weekTotal-horasSem);
+    if(weekExtra>12+0.01) alerts.push({msg:`Semana del ${days[0].key}: extras semanales superan 12h (${weekExtra.toFixed(1)}h extra)`});
+  });
+
+  return {summary,details,alerts};
+}
 
 // ============================================================
-// CÁLCULO PRINCIPAL
+// CALCULAR
 // ============================================================
 function calculate(){
-  const salary = val("salary");
-  const startDate = parseDate(v("startDate").value);
-  const endDate = parseDate(v("endDate").value);
-  endDate.setHours(23,59,59,999);
-  const dailyLimit = val("dailyLimit") || 8;
-  const rows = parseCSV(v("csvInput").value);
-  const alerts = [];
-  let allSegments = [];
+  const m0=chk("mod0on"), m1=chk("mod1on"), m2=chk("mod2on");
+  const salary=num("salary");
+  const horasSem=parseFloat($("horasSem").value)||44;
+  const horasMes=horasSem*4.333333;
+  const valorHora=salary/horasMes;
 
-  rows.forEach((row,wi)=>{
-    const {weekStart} = weekStartForRow(row,wi);
-    for(const [col] of dayCols){
-      const dayOffset = dayCols.find(x=>x[0]===col)[1]===0 ? 6 : dayCols.find(x=>x[0]===col)[1]-1;
-      const date = addDays(weekStart,dayOffset);
-      if(date<startDate||date>endDate) continue;
-      const intervals = parseShift(row[col],date);
-      const raw = row[col]||"";
-      intervals.forEach(interval=>{
-        splitInterval(interval).forEach(seg=>{
-          const segDate=new Date(seg.start);
-          const dateKey=fmtDate(date);
-          const holidayName=holidays2026.get(dateKey)||"";
-          const domFest=isSundayRest(date)||isHoliday(date);
-          const hourly=salary/monthlyDivisorFor(date);
-          allSegments.push({
-            date,dateKey,day:dayName(date),week:row.Semana||`Sem`,
-            raw,start:seg.start,end:seg.end,hours:seg.hours,night:seg.night,
-            domFest,holidayName,hourly,extra:false,extraReason:"",weekKey:getWeekKey(date)
-          });
-        });
-      });
-    }
-  });
+  // MOD 0
+  const {summary:hSummary,details:hDetails,alerts} = calcHours(m0);
+  const extraValor = m0?[...hSummary.values()].filter(x=>x.concept.includes("Extra")||x.concept.includes("nocturno")||x.concept.includes("nocturna")||x.concept.includes("dominical")||x.concept.includes("festiva")).reduce((a,x)=>a+x.add,0):0;
+  const totalHoras = m0?[...hSummary.values()].reduce((a,x)=>a+x.hours,0):0;
+  const extraHoras = m0?[...hSummary.values()].filter(x=>x.concept.startsWith("Extra")).reduce((a,x)=>a+x.hours,0):0;
+  const noctHoras  = m0?[...hSummary.values()].filter(x=>x.concept.includes("noct")).reduce((a,x)=>a+x.hours,0):0;
 
-  allSegments.sort((a,b)=>a.start-b.start);
-  const dayGroups=groupBy(allSegments,s=>s.dateKey);
-  dayGroups.forEach((segments,dateKey)=>{
-    let acc=0; segments.sort((a,b)=>a.start-b.start);
-    for(const s of segments){
-      const before=acc; acc+=s.hours;
-      if(before>=dailyLimit){ s.extra=true; s.extraReason="Excede límite diario"; }
-      else if(acc>dailyLimit){
-        const extraPart=acc-dailyLimit, ordinaryPart=s.hours-extraPart;
-        if(ordinaryPart>0.0001){
-          s.hours=ordinaryPart;
-          const clone={...s,hours:extraPart,extra:true,extraReason:"Excede límite diario",start:new Date(s.end.getTime()-extraPart*3600000)};
-          allSegments.push(clone);
-        } else { s.extra=true; s.extraReason="Excede límite diario"; }
-      }
-    }
-    if(acc>dailyLimit+2) alerts.push({type:"bad",msg:`${dateKey}: extras diarias > 2h. Total: ${num(acc)}h`});
-  });
+  // MOD 1
+  let auxT=0, salProp=salary, comis=0, bon=0, otrosI=0;
+  let pVac=0,pPri=0,pCes=0,pIntCes=0;
+  if(m1){
+    const diasT=Math.min(num("diasTrab"),30);
+    salProp=salary*(diasT/30);
+    const esIntegral=chk("salIntegral");
+    const tieneAux=chk("inclAuxT")&&!esIntegral&&salary<=SMLMV*2;
+    auxT=tieneAux?AUX_T*(diasT/30):0;
+    comis=num("comisiones"); bon=num("bonif"); otrosI=num("otrosIng");
+    const baseP=salProp+auxT;
+    if(chk("pVac")) pVac=salProp*.0417;
+    if(chk("pPrima")) pPri=baseP*.0833;
+    if(chk("pCes")) pCes=baseP*.0833;
+    if(chk("pIntCes")) pIntCes=pCes*.01*12/12;
+  } else { salProp=salary; }
 
-  allSegments.sort((a,b)=>a.start-b.start);
-  const weekGroups=groupBy(allSegments,s=>s.weekKey);
-  weekGroups.forEach((segments,weekKey)=>{
-    const limit=Math.min(...segments.map(s=>weeklyLimitFor(s.date)));
-    let ordinary=segments.filter(s=>!s.extra).reduce((a,s)=>a+s.hours,0);
-    if(ordinary>limit){
-      let excess=ordinary-limit;
-      const candidates=segments.filter(s=>!s.extra).sort((a,b)=>b.start-a.start);
-      for(const s of candidates){
-        if(excess<=0) break;
-        if(s.hours<=excess+0.0001){ s.extra=true; s.extraReason="Excede límite semanal"; excess-=s.hours; }
-        else {
-          const extraPart=excess, ordinaryPart=s.hours-extraPart;
-          s.hours=ordinaryPart;
-          const clone={...s,hours:extraPart,extra:true,extraReason:"Excede límite semanal",start:new Date(s.end.getTime()-extraPart*3600000)};
-          allSegments.push(clone); excess=0;
-        }
-      }
-    }
-    const finalExtra=allSegments.filter(s=>s.weekKey===weekKey&&s.extra).reduce((a,s)=>a+s.hours,0);
-    if(finalExtra>12) alerts.push({type:"bad",msg:`Semana ${weekKey}: extras > 12h. Calculadas: ${num(finalExtra)}h`});
-  });
+  const devBaseSS=salProp+extraValor+comis+bon+otrosI;
+  const totalDevengado=devBaseSS+auxT;
 
-  allSegments=allSegments.filter(s=>s.hours>0.0001).sort((a,b)=>a.start-b.start);
-
-  const summary=new Map(); const details=[];
-  allSegments.forEach(s=>{
-    const p=recargoPct(s.extra,s.night,s.domFest,s.date);
-    const key=conceptKey(s.extra,s.night,s.domFest);
-    const add=additionalPay(s.hours,s.hourly,p,s.extra);
-    const total=s.hours*s.hourly*(1+p);
-    if(!summary.has(key)) summary.set(key,{concept:key,hours:0,pct:p,additional:0,total:0});
-    const item=summary.get(key);
-    item.hours+=s.hours; item.additional+=add; item.total+=total; item.pct=Math.max(item.pct,p);
-    details.push({fecha:s.dateKey,dia:s.day,semana:s.week,turno:s.raw,clasificacion:key,horas:s.hours,baseHora:s.hourly,adicional:add,pct:p,alerta:s.extraReason||(s.holidayName||"")});
-  });
-
-  lastDetails=details;
-  lastSummary=[...summary.values()].sort((a,b)=>a.concept.localeCompare(b.concept));
+  // MOD 2
+  let salud=0,pension=0,fondoSol=0,libranza=0,embargo=0,anticipo=0,otrosDed=0;
+  if(m2){
+    if(chk("dSalud")) salud=devBaseSS*.04;
+    if(chk("dPension")) pension=devBaseSS*.04;
+    if(chk("dFondoSol")&&devBaseSS>SMLMV*4) fondoSol=devBaseSS*.01;
+    libranza=num("libranza"); embargo=num("embargo");
+    anticipo=num("anticipo"); otrosDed=num("otrosDed");
+  }
+  const totalDed=salud+pension+fondoSol+libranza+embargo+anticipo+otrosDed;
+  const neto=totalDevengado-totalDed;
 
   // ============================================================
-  // MÓDULO 1 — DEVENGADO
+  // RENDER MÉTRICAS
   // ============================================================
-  const totalHorasValor = lastSummary.reduce((a,x)=>a+x.total,0);
-  const extraHorasValor = lastSummary.filter(x=>x.concept.startsWith("Extra")||x.concept.includes("nocturno")||x.concept.includes("nocturna")||x.concept.includes("dominical")||x.concept.includes("festiva")).reduce((a,x)=>a+x.additional,0);
+  const emp=$("employeeName").value||"Trabajador";
+  $("resTitle").textContent=`Liquidación — ${emp}`;
 
-  // Salario base proporcional si no trabajó mes completo
-  const diasMes = 30;
-  const diasTrab = Math.min(val("diasTrabajados"), diasMes);
-  const salarioProporcional = salary * (diasTrab / diasMes);
-
-  // Auxilio de transporte
-  const esIntegral = chk("salarioIntegral");
-  const tieneAuxTransporte = chk("includeTransporte") && !esIntegral && salary <= SMLMV_2026 * 2;
-  const auxTransporte = tieneAuxTransporte ? AUX_TRANSPORTE_2026 * (diasTrab / diasMes) : 0;
-
-  // Otros ingresos
-  const comisiones = val("comisiones");
-  const bonificaciones = val("bonificaciones");
-  const otrosIngresos = val("otrosIngresos");
-
-  // Total devengado (base para SS = salario + extras, sin aux transporte ni provisiones)
-  const devengadoBaseSS = salarioProporcional + extraHorasValor + comisiones + bonificaciones + otrosIngresos;
-  const totalDevengado = devengadoBaseSS + auxTransporte;
-
-  // Provisiones (informativas — costo empresa)
-  const baseProvision = salarioProporcional + auxTransporte; // prima y cesantías incluyen aux transporte
-  const provVacaciones = chk("inclVacaciones") ? salarioProporcional * 0.0417 : 0;
-  const provPrima = chk("inclPrima") ? baseProvision * 0.0833 : 0;
-  const provCesantias = chk("inclCesantias") ? baseProvision * 0.0833 : 0;
-  const provIntCesantias = chk("inclIntCesantias") ? provCesantias * 0.01 * 12 / 12 : 0; // 1% mensual
+  let metH="";
+  if(m0) metH+=`
+    <div class="metric"><div class="k">Horas trabajadas</div><div class="v">${totalHoras.toFixed(1)}</div><div class="s">En el periodo</div></div>
+    <div class="metric"><div class="k">H. extras</div><div class="v">${extraHoras.toFixed(1)}</div><div class="s">Diurnas + nocturnas</div></div>
+    <div class="metric"><div class="k">H. nocturnas</div><div class="v">${noctHoras.toFixed(1)}</div><div class="s">Desde 7 p.m.</div></div>`;
+  if(m1||m0) metH+=`<div class="metric"><div class="k">Total devengado</div><div class="v green">${money(totalDevengado)}</div><div class="s">Sal + recargos${m1?"+aux":""}</div></div>`;
+  if(m2) metH+=`<div class="metric"><div class="k">Total deducciones</div><div class="v red">${money(totalDed)}</div><div class="s">SS + otras</div></div>`;
+  if(m2||m1||m0) metH+=`<div class="metric dark"><div class="k">Neto a pagar</div><div class="v">${money(neto)}</div><div class="s">Devengado − deducciones</div></div>`;
+  $("metricsBox").innerHTML=metH;
 
   // ============================================================
-  // MÓDULO 2 — DEDUCCIONES
-  // ============================================================
-  const salud = chk("inclSalud") ? devengadoBaseSS * 0.04 : 0;
-  const pension = chk("inclPension") ? devengadoBaseSS * 0.04 : 0;
-  const fondoSol = chk("inclFondoSol") && devengadoBaseSS > SMLMV_2026 * 4 ? devengadoBaseSS * 0.01 : 0;
-  const libranza = val("libranza");
-  const embargo = val("embargo");
-  const anticipo = val("anticipo");
-  const otrasDeduciones = val("otrasDeduciones");
-
-  const totalDeducciones = salud + pension + fondoSol + libranza + embargo + anticipo + otrasDeduciones;
-  const netoAPagar = totalDevengado - totalDeducciones;
-
-  // ============================================================
-  // RENDER
-  // ============================================================
-  const emp = v("employeeName").value || "Trabajador";
-  const totalHorasTrab = lastSummary.reduce((a,x)=>a+x.hours,0);
-  const extraHoras = lastSummary.filter(x=>x.concept.startsWith("Extra")).reduce((a,x)=>a+x.hours,0);
-  const nightHours = lastSummary.filter(x=>x.concept.includes("nocturna")||x.concept.includes("nocturno")).reduce((a,x)=>a+x.hours,0);
-
-  v("resultTitle").textContent = `Liquidación — ${emp}`;
-
-  v("summary").innerHTML = `
-    <div class="metric"><div class="k">Horas trabajadas</div><div class="v">${num(totalHorasTrab)}</div><div class="s">En el periodo</div></div>
-    <div class="metric"><div class="k">H. extras</div><div class="v">${num(extraHoras)}</div><div class="s">Diurnas + nocturnas</div></div>
-    <div class="metric"><div class="k">H. nocturnas</div><div class="v">${num(nightHours)}</div><div class="s">Desde 7:00 p.m.</div></div>
-    <div class="metric highlight"><div class="k">Neto a pagar</div><div class="v">${money(netoAPagar)}</div><div class="s">Devengado − deducciones</div></div>
-  `;
-
   // COLILLA
-  v("colilla").innerHTML = `
-    <!-- DEVENGADO -->
-    <div class="liq-section">
-      <div class="liq-section-header"><span class="mod-badge mod-1">+</span><span>Devengado</span></div>
-      <div class="liq-section-body">
-        <div class="liq-row"><span class="concept">Salario base (${diasTrab}/30 días)</span><span class="amount">${money(salarioProporcional)}</span></div>
-        ${auxTransporte>0?`<div class="liq-row sub"><span class="concept">Auxilio de transporte</span><span class="amount">${money(auxTransporte)}</span></div>`:''}
-        ${extraHorasValor>0?`<div class="liq-row sub"><span class="concept">Recargos y horas extras</span><span class="amount">${money(extraHorasValor)}</span></div>`:''}
-        ${comisiones>0?`<div class="liq-row sub"><span class="concept">Comisiones</span><span class="amount">${money(comisiones)}</span></div>`:''}
-        ${bonificaciones>0?`<div class="liq-row sub"><span class="concept">Bonificaciones</span><span class="amount">${money(bonificaciones)}</span></div>`:''}
-        ${otrosIngresos>0?`<div class="liq-row sub"><span class="concept">Otros ingresos</span><span class="amount">${money(otrosIngresos)}</span></div>`:''}
-        <div class="liq-row total-row"><span class="concept">Total devengado</span><span class="amount">${money(totalDevengado)}</span></div>
-      </div>
-    </div>
+  // ============================================================
+  let colHTML="";
 
-    <!-- DEDUCCIONES -->
-    <div class="liq-section">
-      <div class="liq-section-header"><span class="mod-badge mod-2">−</span><span>Deducciones</span></div>
-      <div class="liq-section-body">
-        ${salud>0?`<div class="liq-row deduccion"><span class="concept">Salud (4% s/ ${money(devengadoBaseSS)})</span><span class="amount">(${money(salud)})</span></div>`:''}
-        ${pension>0?`<div class="liq-row deduccion"><span class="concept">Pensión (4%)</span><span class="amount">(${money(pension)})</span></div>`:''}
-        ${fondoSol>0?`<div class="liq-row deduccion"><span class="concept">Fondo solidaridad pensional (1%)</span><span class="amount">(${money(fondoSol)})</span></div>`:''}
-        ${libranza>0?`<div class="liq-row deduccion"><span class="concept">Libranza / crédito</span><span class="amount">(${money(libranza)})</span></div>`:''}
-        ${embargo>0?`<div class="liq-row deduccion"><span class="concept">Embargo judicial</span><span class="amount">(${money(embargo)})</span></div>`:''}
-        ${anticipo>0?`<div class="liq-row deduccion"><span class="concept">Anticipo de nómina</span><span class="amount">(${money(anticipo)})</span></div>`:''}
-        ${otrasDeduciones>0?`<div class="liq-row deduccion"><span class="concept">Otras deducciones</span><span class="amount">(${money(otrasDeduciones)})</span></div>`:''}
-        ${totalDeducciones===0?`<div class="liq-row sub"><span class="concept">Sin deducciones registradas</span><span class="amount">—</span></div>`:''}
-        <div class="liq-row total-row"><span class="concept">Total deducciones</span><span class="amount">${money(totalDeducciones)}</span></div>
-      </div>
-    </div>
+  // Devengado
+  colHTML+=`<div class="liq-block"><div class="liq-hdr"><span class="mod-badge m1">+</span><span>Devengado</span></div>`;
+  colHTML+=`<div class="liq-row"><span class="concept">Salario base${m1?` (${num("diasTrab")}/30 días)`:""}</span><span class="amount" style="font-family:var(--mono);font-weight:600">${money(salProp)}</span></div>`;
+  if(m0&&extraValor>0) colHTML+=`<div class="liq-row sub"><span class="concept">Recargos y horas extras</span><span class="amount">${money(extraValor)}</span></div>`;
+  if(m1&&auxT>0) colHTML+=`<div class="liq-row sub"><span class="concept">Auxilio de transporte</span><span class="amount">${money(auxT)}</span></div>`;
+  if(m1&&comis>0) colHTML+=`<div class="liq-row sub"><span class="concept">Comisiones</span><span class="amount">${money(comis)}</span></div>`;
+  if(m1&&bon>0) colHTML+=`<div class="liq-row sub"><span class="concept">Bonificaciones</span><span class="amount">${money(bon)}</span></div>`;
+  if(m1&&otrosI>0) colHTML+=`<div class="liq-row sub"><span class="concept">Otros ingresos</span><span class="amount">${money(otrosI)}</span></div>`;
+  colHTML+=`<div class="liq-row totline"><span class="concept">Total devengado</span><span class="amount">${money(totalDevengado)}</span></div></div>`;
 
-    <!-- NETO -->
-    <div class="liq-section">
-      <div class="liq-section-body">
-        <div class="liq-row neto"><span class="concept">✓ NETO A PAGAR</span><span class="amount">${money(netoAPagar)}</span></div>
-      </div>
-    </div>
+  // Deducciones
+  if(m2){
+    colHTML+=`<div class="liq-block"><div class="liq-hdr"><span class="mod-badge m2">−</span><span>Deducciones</span></div>`;
+    if(salud>0) colHTML+=`<div class="liq-row ded"><span class="concept">Salud — 4%</span><span class="amount">(${money(salud)})</span></div>`;
+    if(pension>0) colHTML+=`<div class="liq-row ded"><span class="concept">Pensión — 4%</span><span class="amount">(${money(pension)})</span></div>`;
+    if(fondoSol>0) colHTML+=`<div class="liq-row ded"><span class="concept">Fondo solidaridad — 1%</span><span class="amount">(${money(fondoSol)})</span></div>`;
+    if(libranza>0) colHTML+=`<div class="liq-row ded"><span class="concept">Libranza</span><span class="amount">(${money(libranza)})</span></div>`;
+    if(embargo>0) colHTML+=`<div class="liq-row ded"><span class="concept">Embargo judicial</span><span class="amount">(${money(embargo)})</span></div>`;
+    if(anticipo>0) colHTML+=`<div class="liq-row ded"><span class="concept">Anticipo de nómina</span><span class="amount">(${money(anticipo)})</span></div>`;
+    if(otrosDed>0) colHTML+=`<div class="liq-row ded"><span class="concept">Otras deducciones</span><span class="amount">(${money(otrosDed)})</span></div>`;
+    if(totalDed===0) colHTML+=`<div class="liq-row sub"><span class="concept">Sin deducciones registradas</span><span class="amount">—</span></div>`;
+    colHTML+=`<div class="liq-row totline"><span class="concept">Total deducciones</span><span class="amount">${money(totalDed)}</span></div></div>`;
+  }
 
-    <!-- PROVISIONES INFORMATIVAS -->
-    ${(provVacaciones+provPrima+provCesantias+provIntCesantias)>0?`
-    <div class="liq-section" style="opacity:.85">
-      <div class="liq-section-header"><span class="mod-badge mod-0">i</span><span>Provisiones del mes (costo empresa — no se pagan ahora)</span></div>
-      <div class="liq-section-body">
-        ${provVacaciones>0?`<div class="liq-row sub"><span class="concept">Provisión vacaciones (4.17%)</span><span class="amount">${money(provVacaciones)}</span></div>`:''}
-        ${provPrima>0?`<div class="liq-row sub"><span class="concept">Provisión prima (8.33%)</span><span class="amount">${money(provPrima)}</span></div>`:''}
-        ${provCesantias>0?`<div class="liq-row sub"><span class="concept">Provisión cesantías (8.33%)</span><span class="amount">${money(provCesantias)}</span></div>`:''}
-        ${provIntCesantias>0?`<div class="liq-row sub"><span class="concept">Provisión int. cesantías (1% men.)</span><span class="amount">${money(provIntCesantias)}</span></div>`:''}
-        <div class="liq-row"><span class="concept" style="font-weight:700">Total provisiones</span><span class="amount" style="font-family:var(--font-mono);font-weight:700">${money(provVacaciones+provPrima+provCesantias+provIntCesantias)}</span></div>
-      </div>
-    </div>`:''}
-  `;
+  // Neto
+  colHTML+=`<div class="liq-block"><div class="liq-row neto"><span class="concept">✓ NETO A PAGAR</span><span class="amount">${money(neto)}</span></div></div>`;
 
-  // ALERTAS
-  v("alerts").innerHTML = alerts.length
-    ? `<div class="notes" style="margin-bottom:12px">${alerts.map(a=>`<p style="margin-bottom:4px"><span class="pill ${a.type}">Alerta</span> ${a.msg}</p>`).join("")}</div>`
-    : `<p style="margin-bottom:12px"><span class="pill good">✓ Sin alertas legales</span></p>`;
+  // Provisiones
+  const totProv=pVac+pPri+pCes+pIntCes;
+  if(m1&&totProv>0){
+    colHTML+=`<div class="liq-block" style="opacity:.8"><div class="liq-hdr"><span class="mod-badge m0">i</span><span>Provisiones del mes — costo empresa (no se pagan ahora)</span></div>`;
+    if(pVac>0) colHTML+=`<div class="liq-row prov"><span class="concept">Vacaciones (4.17%)</span><span class="amount">${money(pVac)}</span></div>`;
+    if(pPri>0) colHTML+=`<div class="liq-row prov"><span class="concept">Prima de servicios (8.33%)</span><span class="amount">${money(pPri)}</span></div>`;
+    if(pCes>0) colHTML+=`<div class="liq-row prov"><span class="concept">Cesantías (8.33%)</span><span class="amount">${money(pCes)}</span></div>`;
+    if(pIntCes>0) colHTML+=`<div class="liq-row prov"><span class="concept">Intereses cesantías (1% men.)</span><span class="amount">${money(pIntCes)}</span></div>`;
+    colHTML+=`<div class="liq-row totline prov" style="background:#f1f5f9"><span class="concept">Total provisiones</span><span class="amount">${money(totProv)}</span></div></div>`;
+  }
 
-  // TABLA RESUMEN HORAS
-  v("summaryRows").innerHTML = lastSummary.map(x=>`
-    <tr>
-      <td>${x.concept}</td>
-      <td class="num">${num(x.hours)}</td>
-      <td class="num">${Math.round(x.pct*100)}%</td>
-      <td class="num">${money(x.additional)}</td>
-      <td class="num">${money(x.total)}</td>
-    </tr>
-  `).join("") || `<tr><td colspan="5">Sin datos para el periodo.</td></tr>`;
+  $("colilla").innerHTML=colHTML;
 
-  // TABLA DETALLE
-  v("detailRows").innerHTML = lastDetails.map(x=>`
-    <tr>
-      <td>${x.fecha}</td><td>${x.dia}</td><td>${x.semana}</td><td>${x.turno}</td><td>${x.clasificacion}</td>
-      <td class="num">${num(x.horas)}</td><td class="num">${money(x.baseHora)}</td><td class="num">${money(x.adicional)}</td>
-      <td>${x.alerta?`<span class="pill ${x.alerta.includes('Excede')?'warn':'info'}">${x.alerta}</span>`:""}</td>
-    </tr>
-  `).join("") || `<tr><td colspan="9">Sin detalle.</td></tr>`;
+  // Alertas
+  $("alertsBox").innerHTML=alerts.length
+    ?`<div style="margin-bottom:10px">${alerts.map(a=>`<p style="margin-bottom:4px"><span class="pill bad">Alerta</span> ${a.msg}</p>`).join("")}</div>`
+    :`<p style="margin-bottom:10px"><span class="pill ok">✓ Sin alertas legales</span></p>`;
+
+  // Tab horas
+  const rows=[...(m0?hSummary.values():[])].sort((a,b)=>a.concept.localeCompare(b.concept));
+  $("horasBody").innerHTML=rows.length
+    ?rows.map(x=>`<tr><td>${x.concept}</td><td class="n">${x.hours.toFixed(2)}</td><td class="n">${Math.round(x.pct*100)}%</td><td class="n">${money(x.add)}</td><td class="n">${money(x.total)}</td></tr>`).join("")
+    :`<tr><td colspan="5" style="color:var(--muted)">${m0?"Sin turnos registrados en el calendario.":"Módulo de horas desactivado."}</td></tr>`;
+
+  // Tab días
+  $("diasBody").innerHTML=m0&&hDetails.length
+    ?hDetails.map(x=>`<tr><td>${x.fecha}</td><td>${x.dia}</td><td style="font-family:var(--mono);font-size:11px">${x.turno}</td><td>${x.clasificacion}</td><td class="n">${x.horas.toFixed(2)}</td><td class="n">${money(x.adicional)}</td><td>${x.nota?`<span class="pill info">${x.nota}</span>`:""}</td></tr>`).join("")
+    :`<tr><td colspan="7" style="color:var(--muted)">${m0?"Registra turnos en el calendario para ver el detalle.":"Módulo de horas desactivado."}</td></tr>`;
 }
 
 // ============================================================
-// EVENTOS Y UTILIDADES
+// TABS
 // ============================================================
 function showTab(name){
-  ["resumen","detalle","normativa"].forEach(t=>{
-    v(`tab-${t}`).classList.toggle("hidden",t!==name);
-  });
-  document.querySelectorAll(".tab").forEach(tab=>tab.classList.remove("active"));
-  [...document.querySelectorAll(".tab")].find(t=>t.textContent.toLowerCase().includes(
-    name==="resumen"?"resumen":name==="detalle"?"detalle":"normativa"
+  ["horas","dias","norma"].forEach(t=>$(` tab-${t}`.trim()).classList.toggle("hidden",t!==name));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  [...document.querySelectorAll(".tab")].find(t=>t.textContent.toLowerCase().startsWith(
+    name==="horas"?"detalle":name==="dias"?"por":"norm"
   ))?.classList.add("active");
 }
 
-function applyPeriodPreset(){
-  const type=v("periodType").value, month=v("monthBase").value;
-  if(type==="custom"||!month) return;
-  const [y,m]=month.split("-").map(Number);
-  const last=new Date(y,m,0).getDate();
-  let start=`${y}-${pad(m)}-01`, end=`${y}-${pad(m)}-${pad(last)}`;
-  if(type==="quincena1") end=`${y}-${pad(m)}-15`;
-  if(type==="quincena2") start=`${y}-${pad(m)}-16`;
-  v("startDate").value=start; v("endDate").value=end;
-  v("calendarYear").value=y;
-  const sd=parseDate(start), mon=addDays(sd,-((sd.getDay()+6)%7));
-  const w1=v("week1Monday"); if(w1) w1.value=fmtDate(mon);
+// Corregir selector en showTab
+function showTab(name){
+  $("tab-horas").classList.toggle("hidden",name!=="horas");
+  $("tab-dias").classList.toggle("hidden",name!=="dias");
+  $("tab-norma").classList.toggle("hidden",name!=="norma");
+  document.querySelectorAll(".tab").forEach((t,i)=>{
+    t.classList.toggle("active",["horas","dias","norma"][i]===name);
+  });
 }
 
-function downloadCSV(){
-  const headers=["fecha","dia","semana","turno","clasificacion","horas","baseHora","adicional","porcentajeRecargo","alerta"];
-  const lines=[headers.join(";")].concat(lastDetails.map(d=>[
-    d.fecha,d.dia,d.semana,d.turno,d.clasificacion,d.horas.toFixed(2),Math.round(d.baseHora),Math.round(d.adicional),Math.round(d.pct*100)+"%",d.alerta
-  ].map(vv=>String(vv).replaceAll(";"," ")).join(";")));
+// ============================================================
+// EXPORT CSV
+// ============================================================
+function exportCSV(){
+  const {details}=calcHours(chk("mod0on"));
+  if(!details.length){alert("Sin turnos para exportar.");return;}
+  const lines=["fecha;dia;turno;clasificacion;horas;adicional;nota",
+    ...details.map(d=>[d.fecha,d.dia,d.turno,d.clasificacion,d.horas.toFixed(2),Math.round(d.adicional),d.nota].join(";"))];
   const blob=new Blob([lines.join("\n")],{type:"text/csv;charset=utf-8"});
-  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="nomina_colombia_2026.csv"; a.click(); URL.revokeObjectURL(a.href);
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="nomina_colombia.csv";a.click();URL.revokeObjectURL(a.href);
 }
 
-v("periodType").addEventListener("change",applyPeriodPreset);
-v("monthBase").addEventListener("change",applyPeriodPreset);
-v("weekMode").addEventListener("change",()=>{
-  v("relativeWeekBlock").classList.toggle("hidden",v("weekMode").value!=="relative");
-  calculate();
-});
-v("calendarYear").addEventListener("change",calculate);
-v("fileInput").addEventListener("change",ev=>{
-  const file=ev.target.files[0]; if(!file) return;
-  const reader=new FileReader();
-  reader.onload=e=>{v("csvInput").value=e.target.result; calculate();};
-  reader.readAsText(file,"utf-8");
-});
-
-// Recalcular al cambiar cualquier input de módulo 1 y 2
-["salary","diasTrabajados","diasVacaciones","comisiones","bonificaciones","otrosIngresos",
- "libranza","embargo","anticipo","otrasDeduciones"].forEach(id=>{
-  v(id).addEventListener("change",calculate);
-});
-["includeTransporte","salarioIntegral","inclVacaciones","inclPrima","inclCesantias","inclIntCesantias",
- "inclSalud","inclPension","inclFondoSol","includeHolidays","useSundayAsRest"].forEach(id=>{
-  v(id).addEventListener("change",calculate);
-});
-
+// ============================================================
+// INIT
+// ============================================================
+renderCalendar();
 calculate();
 </script>
 </body>
