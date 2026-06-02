@@ -233,15 +233,15 @@
         <div class="file-area">
           <label>Importar archivo CSV</label>
           <input id="fileInput" type="file" accept=".csv,text/csv">
-          <div class="hint">Columnas: Semana;Lunes;Martes;Miercoles;Jueves;Viernes;Sabado;Domingo;HrsSemanales</div>
+          <div class="hint">Columnas: Semana,Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo,HrsSemanales</div>
         </div>
         <label style="margin-top:12px">Pegar / editar CSV</label>
-        <textarea id="csvInput">Semana;Lunes;Martes;Miercoles;Jueves;Viernes;Sabado;Domingo;HrsSemanales
-Semana18;10:00-17:00;10:00-17:00;10:00-17:00;17:00-00:00;Díadelafamilia;Descanso;06:00-13:00;35
-Semana19;06:00-13:00;06:00-13:00;06:00-13:00;06:00-13:00;06:00-15:00;Descanso;06:00-13:00;44
-Semana20;06:00-13:00;06:00-13:00;06:00-13:00;06:00-13:00;06:00-15:00;06:00-13:00;Descanso;44
-Semana21;17:00-00:00;10:00-17:00;17:00-00:00;17:00-00:00;Descanso;17:00-00:00;17:00-00:00;42
-Semana22;17:00-00:00;10:00-17:00;17:00-00:00;15:00-00:00;Descanso;17:00-00:00;17:00-00:00;44</textarea>
+        <textarea id="csvInput">Semana,Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Domingo,HrsSemanales
+Semana18,10:00-17:00,10:00-17:00,10:00-17:00,17:00-00:00,Díadelafamilia,Descanso,06:00-13:00,35
+Semana19,06:00-13:00,06:00-13:00,06:00-13:00,06:00-13:00,06:00-15:00,Descanso,06:00-13:00,44
+Semana20,06:00-13:00,06:00-13:00,06:00-13:00,06:00-13:00,06:00-15:00,06:00-13:00,Descanso,44
+Semana21,17:00-00:00,10:00-17:00,17:00-00:00,17:00-00:00,Descanso,17:00-00:00,17:00-00:00,42
+Semana22,17:00-00:00,10:00-17:00,17:00-00:00,15:00-00:00,Descanso,17:00-00:00,17:00-00:00,44</textarea>
       </div>
     </div>
 
@@ -491,8 +491,8 @@ function weekStartForRow(row,index){
 function parseCSV(text){
   const lines=text.replace(/\r/g,"").split("\n").filter(l=>l.trim().length);
   if(!lines.length) return [];
-  const headers=lines[0].split(";").map(h=>h.trim());
-  return lines.slice(1).map(line=>{ const cells=line.split(";"); const obj={}; headers.forEach((h,i)=>obj[h]=(cells[i]||"").trim()); return obj; });
+  const headers=lines[0].split(",").map(h=>h.trim());
+  return lines.slice(1).map(line=>{ const cells=line.split(","); const obj={}; headers.forEach((h,i)=>obj[h]=(cells[i]||"").trim()); return obj; });
 }
 function parseShift(value,date){
   const vv=(value||"").trim();
